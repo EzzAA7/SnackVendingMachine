@@ -5,37 +5,20 @@ import java.util.*;
 public class VendingMachine {
 
     private EnumMap<Coin, Integer> balanceCoins;
+    private HashMap<Integer, Product> products;
     private int balance;
 
     public VendingMachine() {
         this.balanceCoins = new EnumMap<>(Coin.class);
-        fillMachine(balanceCoins);
+        this.products = new HashMap<>();
+        setupMachineMoney(balanceCoins);
+        fillMachineProducts();
         this.balance = calculateBalance(balanceCoins);
     }
 
     public EnumMap<Coin, Integer> getBalanceCoins() {
 
         return balanceCoins;
-    }
-
-    public void setBalanceCoins(EnumMap<Coin, Integer> balanceCoins) {
-
-        this.balanceCoins = balanceCoins;
-    }
-
-    private int calculateBalance(EnumMap<Coin, Integer> balanceCoins) {
-        int sum = 0;
-        for (EnumMap.Entry<Coin, Integer> entry : balanceCoins.entrySet()) {
-            sum += entry.getValue() * entry.getKey().getRepresentVal();
-        }
-        return sum;
-    }
-
-    private void fillMachine(EnumMap<Coin, Integer> balanceCoins) {
-        balanceCoins.put(Coin.TEN_SHEKELS, 1);
-        balanceCoins.put(Coin.FIVE_SHEKELS, 6);
-        balanceCoins.put(Coin.TWO_SHEKELS, 5);
-        balanceCoins.put(Coin.ONE_SHEKELS, 10);
     }
 
     public int getBalance() {
@@ -48,17 +31,53 @@ public class VendingMachine {
         this.balance = balance;
     }
 
+    public void setBalanceCoins(EnumMap<Coin, Integer> balanceCoins) {
+
+        this.balanceCoins = balanceCoins;
+    }
+
+    public HashMap<Integer, Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(HashMap<Integer, Product> products) {
+        this.products = products;
+    }
+
+    private int calculateBalance(EnumMap<Coin, Integer> balanceCoins) {
+        int sum = 0;
+        for (EnumMap.Entry<Coin, Integer> entry : balanceCoins.entrySet()) {
+            sum += entry.getValue() * entry.getKey().getRepresentVal();
+        }
+        return sum;
+    }
+
+    private void setupMachineMoney(EnumMap<Coin, Integer> balanceCoins) {
+        balanceCoins.put(Coin.TEN_SHEKELS, 1);
+        balanceCoins.put(Coin.FIVE_SHEKELS, 6);
+        balanceCoins.put(Coin.TWO_SHEKELS, 5);
+        balanceCoins.put(Coin.ONE_SHEKELS, 10);
+    }
+
+    private void fillMachineProducts() {
+        products.put(1, new Product(1, "TWIX", 5, 3));
+        products.put(2, new Product(2, "KITKAT", 4, 5));
+        products.put(3, new Product(3, "XL", 5, 10));
+        products.put(4, new Product(4, "WATER", 2, 2));
+        products.put(5, new Product(5, "COCA-COLA", 4, 7));
+    }
+
     public void displayProducts() {
         System.out.println(" *********************************************");
-        System.out.println("     WELCOME TO THE VENDING MACHINE           ");
+        System.out.println("     WELCOME TO THE FREIGHTOS VENDING MACHINE           ");
         System.out.println(" *********************************************");
-        System.out.println("            Products available:               ");
+        System.out.println("      _________Our Products available_______               ");
         System.out.println("                                              ");
-        for (Product product : Product.values()) {
-            if (!Product.EMPTY.equals(product)) {
-                System.out.println("    - " + product.getProductId() + " -  " + product.name() + " | " + product.getPrice() + " Shekels   " + " (Quantity: " + product.getQuantity() + ")");
-            }
+
+        for (Map.Entry<Integer, Product> entry : products.entrySet()) {
+            System.out.println("    - " + entry.getValue().getProductId() + " -  " + entry.getValue().getName() + " | " + entry.getValue().getPrice() + " Shekels   " + " (Quantity: " + entry.getValue().getQuantity() + ")");
         }
+
         System.out.println("                                              ");
         System.out.println(" --- Please select a product (type its id) --- ");
     }

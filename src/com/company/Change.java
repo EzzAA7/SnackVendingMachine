@@ -29,9 +29,9 @@ public class Change {
 
     @Override
     public String toString() {
-        return "Change{" +
-                "amount=" + amount +
-                ", numOfCoins=" + Arrays.toString(numOfCoins) +
-                '}';
+        return "Amount of Change: " + amount +
+                "\n the returned coins are as follows: \n\t" + numOfCoins[0] + " Ten Sheksls\n\t" +
+                numOfCoins[1] + " Five Sheksls\n\t" + numOfCoins[2] + " Two Sheksls\n\t" +
+                numOfCoins[3] + " One Sheksls\n";
     }
 }

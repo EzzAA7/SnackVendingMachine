@@ -1,7 +1,5 @@
 package com.company;
 
-import java.util.Arrays;
-
 public class Change {
     private  int amount;
     private int[] numOfCoins;

@@ -1,7 +1,9 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.Map;
 
 public class VMRunnder {
     private VendingMachine vm;
@@ -16,6 +18,7 @@ public class VMRunnder {
     }
 
     public VendingMachine getVm() {
+
         return vm;
     }
 
@@ -37,9 +40,10 @@ public class VMRunnder {
         return enteredCoins;
     }
 
-    public void setEnteredCoins(HashMap<Coin, Integer> enteredCoins) {
-
-        this.enteredCoins = enteredCoins;
+    public void enterCoin(Coin c) {
+        this.enteredCoins.put(c, this.enteredCoins.getOrDefault(c,0)+1);
+        this.setEnteredSum(calculateEnteredSum());
+        System.out.println("You have entered " + c + " ====> The total is now: " + enteredSum);
     }
 
     public int getEnteredSum() {
@@ -56,5 +60,13 @@ public class VMRunnder {
         System.out.println(" The current entered amount is: " + this.getEnteredSum());
         System.out.println(" ------------------------------------------ ");
 
+    }
+
+    private int calculateEnteredSum() {
+        int sum = 0;
+        for (EnumMap.Entry<Coin, Integer> entry : enteredCoins.entrySet()) {
+            sum += entry.getValue() * entry.getKey().getRepresentVal();
+        }
+        return sum;
     }
 }

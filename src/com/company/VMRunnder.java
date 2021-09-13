@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class VMRunnder {
     private VendingMachine vm;
-    private int selectedProd;
+    private Product selectedProd;
     private HashMap<Coin, Integer> enteredCoins;
     private int enteredSum;
 
@@ -20,30 +20,35 @@ public class VMRunnder {
     }
 
     public void setVm(VendingMachine vm) {
+
         this.vm = vm;
     }
 
-    public int getSelectedProd() {
+    public Product getSelectedProd() {
         return selectedProd;
     }
 
-    public void setSelectedProd(int selectedProd) {
+    public void setSelectedProd(Product selectedProd) {
         this.selectedProd = selectedProd;
     }
 
     public HashMap<Coin, Integer> getEnteredCoins() {
+
         return enteredCoins;
     }
 
     public void setEnteredCoins(HashMap<Coin, Integer> enteredCoins) {
+
         this.enteredCoins = enteredCoins;
     }
 
     public int getEnteredSum() {
+
         return enteredSum;
     }
 
     public void setEnteredSum(int enteredSum) {
+
         this.enteredSum = enteredSum;
     }
 

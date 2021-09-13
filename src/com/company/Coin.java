@@ -9,7 +9,7 @@ public enum Coin {
         this.representVal = representVal;
     }
 
-    public int getrepresentVal(){
+    public int getRepresentVal(){
         return this.representVal;
     }
 }

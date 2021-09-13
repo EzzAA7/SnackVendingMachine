@@ -12,18 +12,22 @@ public class Change {
     }
 
     public int getAmount() {
+
         return amount;
     }
 
     public void setAmount(int amount) {
+
         this.amount = amount;
     }
 
     public int[] getNumOfCoins() {
+
         return numOfCoins;
     }
 
     public void setNumOfCoins(int[] numOfCoins) {
+
         this.numOfCoins = numOfCoins;
     }
 

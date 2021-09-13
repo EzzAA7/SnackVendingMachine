@@ -30,31 +30,56 @@ public class Driver {
 
         int choice = getChoice();
 
-        Product chosenProduct = Product.getProduct(choice);
+        Product chosenProduct = vendingMachine.getProducts().get(choice);
         if(chosenProduct == null){
             System.out.println("No such product, try again");
             //TODO: try again
         }
         else {
             System.out.println("The selected product is the following:");
-            System.out.println("     " + chosenProduct.getProductId() + "  " + chosenProduct.name() + " | " + chosenProduct.getPrice() + " Shekels   ");
+            System.out.println("     " + chosenProduct.getProductId() + "  " + chosenProduct.getName() + " | " + chosenProduct.getPrice() + " Shekels   ");
         }
 
-        //TODO: check if in balance
+        // check if in balance
         if(vmr.getEnteredSum() < chosenProduct.getPrice()){
             System.out.println("Not enough in balance, start entering");
         }
+
+        // check if vending machine has enough money to return change
         else if(vendingMachine.getBalance() < vmr.getEnteredSum() - chosenProduct.getPrice()){
             System.out.println("Vending machine doesn't have enough change, contact admin");
         }
-        //TODO: decremnt balance, return possible change, reset sum, reset change, dispense product
-        else {
-            vmr.setSelectedProd(chosenProduct);
-            Change change = new Change(vmr.getEnteredSum() - chosenProduct.getPrice());
 
-            vendingMachine.calcChange(change);
-            System.out.println(" ");
-            System.out.println(change.toString());
+        else if( chosenProduct.getQuantity() < 1){
+            System.out.println("Not in stock, contact admin");
+        }
+
+        else {
+
+            try{
+                // setup selected product
+                vmr.setSelectedProd(chosenProduct);
+
+                // initialize change amount
+                vmr.setYourChange(new Change(vmr.getEnteredSum() - chosenProduct.getPrice()));
+
+                // calculate how change will return to user (in coins)
+                vendingMachine.calcChange(vmr.getYourChange());
+                System.out.println(" ");
+                System.out.println(vmr.getYourChange().toString());
+
+                // decrement product quantity
+                chosenProduct.setQuantity(chosenProduct.getQuantity() -1);
+
+                // dispense product
+                System.out.println(" DISPENSING:");
+                System.out.println("     " + chosenProduct.getProductId() + "  " + chosenProduct.getName() + " | " +
+                        chosenProduct.getQuantity() + "   ");
+
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
 
         }
 

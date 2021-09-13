@@ -10,6 +10,7 @@ public class VMRunnder {
     private Product selectedProd;
     private HashMap<Coin, Integer> enteredCoins;
     private int enteredSum;
+    private Change yourChange;
 
     public VMRunnder(VendingMachine vm) {
         this.vm = vm;
@@ -54,6 +55,14 @@ public class VMRunnder {
     public void setEnteredSum(int enteredSum) {
 
         this.enteredSum = enteredSum;
+    }
+
+    public Change getYourChange() {
+        return yourChange;
+    }
+
+    public void setYourChange(Change yourChange) {
+        this.yourChange = yourChange;
     }
 
     public void displayBalance(){

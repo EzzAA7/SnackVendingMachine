@@ -136,7 +136,7 @@ public class Driver {
         else {
             System.out.println(" ");
             System.out.println("The selected product is the following:");
-            System.out.println("     " + chosenProduct.getProductId() + "  " + chosenProduct.getName() + " | " + chosenProduct.getPrice() + " Shekels   ");
+            System.out.println("     " + chosenProduct.getProductId() + "  " + chosenProduct.getName() + " | " + chosenProduct.getPrice() + " $   ");
         }
         return chosenProduct;
     }

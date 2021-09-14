@@ -28,11 +28,11 @@ public class Driver {
 
             // check if vending machine has enough money to return change
             if(snackMachine.getBalance().compareTo(vmr.getEnteredSum().subtract(chosenProduct.getPrice())) < 0){
-                System.out.println("Vending machine doesn't have enough change, contact admin");
+                throw new NotEnoughChange("Vending machine doesn't have enough change, contact admin");
             }
 
             else if( chosenProduct.getQuantity() < 1){
-                System.out.println("Not in stock, contact admin");
+                throw new NotEnoughInStock("Not in stock, contact admin");
             }
 
             // meets needed conditions => can proceed

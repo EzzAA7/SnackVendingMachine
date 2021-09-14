@@ -8,7 +8,7 @@ public class Change {
 
     public Change(BigDecimal amount) {
         this.amount = amount;
-        this.numOfCoins = new int[4];
+        this.numOfCoins = new int[6];
     }
 
     public BigDecimal getAmount() {
@@ -34,8 +34,11 @@ public class Change {
     @Override
     public String toString() {
         return "Amount of Change: " + amount +
-                "\n the returned coins are as follows: \n\t" + numOfCoins[0] + " x 1 USD\n\t" +
-                numOfCoins[1] + " x Fifty Cents \n\t" + numOfCoins[2] + " x Twenty Cents \n\t" +
-                numOfCoins[3] + " x Ten Cents\n";
+                "\n the returned coins are as follows: \n\t" + numOfCoins[0] + " x 50 USD\n\t" +
+                numOfCoins[1] + " x 20 USD\n\t" +
+                numOfCoins[2] + " x 1 USED \n\t" +
+                numOfCoins[3] + " x Fifty Cents \n\t" +
+                numOfCoins[4] + " x Twenty Cents \n\t" +
+                numOfCoins[5] + " x Ten Cents\n";
     }
 }

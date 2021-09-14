@@ -81,17 +81,71 @@ public class SnackMachine {
         products.put(3, new Product(3, "XL", BigDecimal.valueOf(5.50), 10));
         products.put(4, new Product(4, "WATER", BigDecimal.valueOf(1.70), 2));
         products.put(5, new Product(5, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(6, new Product(6, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(7, new Product(7, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(8, new Product(8, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(9, new Product(9, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(10, new Product(10, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(11, new Product(11, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(12, new Product(12, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(13, new Product(13, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(14, new Product(14, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(15, new Product(15, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(16, new Product(16, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(17, new Product(17, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(18, new Product(18, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(19, new Product(19, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(20, new Product(20, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(21, new Product(21, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(22, new Product(22, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(23, new Product(23, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(24, new Product(24, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put(25, new Product(25, "SPRITE", BigDecimal.valueOf(2.90), 7));
     }
 
     public void displayProducts() {
-        System.out.println(" *********************************************");
-        System.out.println("     WELCOME TO THE FREIGHTOS VENDING MACHINE           ");
-        System.out.println(" *********************************************");
-        System.out.println("      _________Our Products available_______               ");
+        System.out.println(" \t\t\t\t\t\t*********************************************");
+        System.out.println(" \t\t\t\t\t\t    WELCOME TO THE FREIGHTOS VENDING MACHINE           ");
+        System.out.println("\t\t\t\t\t\t *********************************************");
+        System.out.printf("\t\t\t\t\t\t %-25s", "_________________ Our available products _________________");
         System.out.println("                                              ");
 
-        for (Map.Entry<Integer, Product> entry : products.entrySet()) {
-            System.out.println("    - " + entry.getValue().getProductId() + " -  " + entry.getValue().getName() + " | " + entry.getValue().getPrice() + " USD   " + " (Quantity: " + entry.getValue().getQuantity() + ")");
+        for (int i=1; i<= products.size() ; i+=5) {
+            System.out.printf(
+                    "\t\t\t\t || %-15s | %-15s | %-15s | %-15s | %-15s ||", i, (i+1), (i+2) , (i+3), (i+4));
+            System.out.println(" ");
+            System.out.println("\t\t\t\t----------------------------------------------------------------------------------------------");
+
+//            System.out.println(" ");
+
+            System.out.printf(
+                    "\t\t\t\t || %-15s | %-15s | %-15s | %-15s | %-15s ||", products.get(i).getName(),
+                    products.get(i+1).getName(), products.get(i+2).getName() , products.get(i+3).getName(),
+                    products.get(i+4).getName() );
+
+            System.out.println(" ");
+            System.out.printf(
+                    "\t\t\t\t || $%-14s | $%-14s | $%-14s | $%-14s | $%-14s ||", products.get(i).getPrice(),
+                    products.get(i+1).getPrice(), products.get(i+2).getPrice() , products.get(i+3).getPrice(),
+                    products.get(i+4).getPrice() );
+
+            System.out.println(" ");
+            System.out.printf(
+                    "\t\t\t\t || Quantity: %-5s | Quantity: %-5s | Quantity: %-5s | Quantity: %-5s | Quantity: %-5s ||",
+                    products.get(i).getQuantity(),
+                    products.get(i+1).getQuantity(), products.get(i+2).getQuantity() , products.get(i+3).getQuantity(),
+                    products.get(i+4).getQuantity() );
+//            System.out.println(
+//                    "\t\t || " + " (Quantity: "  + products.get(i).getQuantity() +
+//                    "\t\t | " + " (Quantity: "  + products.get(i+1).getQuantity() +
+//                    "\t\t | " + " (Quantity: "  + products.get(i+2).getQuantity() +
+//                    "\t\t | " + " (Quantity: "  + products.get(i+3).getQuantity() +
+//                    "\t\t || " + " (Quantity: "  + products.get(i+4).getQuantity() );
+
+            System.out.println(" ");
+            System.out.println("\t\t\t\t==============================================================================================");
+            System.out.println(" ");
+
         }
     }
 

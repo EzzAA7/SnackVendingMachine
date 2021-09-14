@@ -1,8 +1,9 @@
-package com.company.com.implementation;
+package implementation;
 
-import com.company.com.money.Card;
-import com.company.com.money.Coin;
-import com.company.com.money.Note;
+import interfaces.VMRImplementation;
+import components.Card;
+import components.Coin;
+import components.Note;
 
 import java.math.BigDecimal;
 import java.util.EnumMap;

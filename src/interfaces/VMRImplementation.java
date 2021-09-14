@@ -1,7 +1,7 @@
-package com.company.com.implementation;
+package interfaces;
 
-import com.company.com.money.Coin;
-import com.company.com.money.Note;
+import components.Coin;
+import components.Note;
 
 import java.math.BigDecimal;
 

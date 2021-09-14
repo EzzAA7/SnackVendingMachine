@@ -1,4 +1,4 @@
-package errors;
+package exceptions;
 
 public class NoSuchMonetary extends Exception{
     public NoSuchMonetary(String message) {

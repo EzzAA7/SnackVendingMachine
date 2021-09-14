@@ -1,6 +1,7 @@
-package com.company.com.implementation;
+package interfaces;
 
-import errors.NotEnoughChange;
+import exceptions.NotEnoughChange;
+import implementation.Change;
 
 import java.math.BigDecimal;
 

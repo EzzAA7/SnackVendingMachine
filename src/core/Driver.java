@@ -1,13 +1,13 @@
-package com.company;
+package core;
 
-import com.company.com.implementation.Change;
-import com.company.com.implementation.Product;
-import com.company.com.implementation.SnackMachine;
-import com.company.com.implementation.VMRunner;
-import com.company.com.money.Card;
-import com.company.com.money.Coin;
-import com.company.com.money.Note;
-import errors.*;
+import implementation.Change;
+import implementation.Product;
+import implementation.SnackMachine;
+import implementation.VMRunner;
+import components.Card;
+import components.Coin;
+import components.Note;
+import exceptions.*;
 
 import java.math.BigDecimal;
 import java.util.Scanner;

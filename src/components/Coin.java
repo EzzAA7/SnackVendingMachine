@@ -1,4 +1,6 @@
-package com.company.com.money;
+package components;
+
+import interfaces.MonetaryValue;
 
 import java.math.BigDecimal;
 

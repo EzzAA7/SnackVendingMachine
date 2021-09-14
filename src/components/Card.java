@@ -1,4 +1,4 @@
-package com.company.com.money;
+package components;
 
 import java.math.BigDecimal;
 import java.util.EnumMap;

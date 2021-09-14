@@ -1,4 +1,4 @@
-package com.company.com.implementation;
+package implementation;
 
 import java.math.BigDecimal;
 

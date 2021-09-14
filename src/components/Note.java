@@ -1,8 +1,10 @@
-package com.company.com.money;
+package components;
+
+import interfaces.MonetaryValue;
 
 import java.math.BigDecimal;
 
-public enum Note implements MonetaryValue{
+public enum Note implements MonetaryValue {
     TWENTY_DOLLARS(BigDecimal.valueOf(20.00)), FIFTY_DOLLARS(BigDecimal.valueOf(50.00)), EMPTY(BigDecimal.valueOf(0.00));
 
     private BigDecimal representVal;

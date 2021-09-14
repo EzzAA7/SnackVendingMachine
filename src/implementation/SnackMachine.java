@@ -1,8 +1,9 @@
-package com.company.com.implementation;
+package implementation;
 
-import com.company.com.money.Coin;
-import com.company.com.money.Note;
-import errors.NotEnoughChange;
+import interfaces.SnackMachineInterface;
+import components.Coin;
+import components.Note;
+import exceptions.NotEnoughChange;
 
 import java.math.BigDecimal;
 import java.util.*;

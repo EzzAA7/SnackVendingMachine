@@ -15,6 +15,7 @@ public enum Note implements MonetaryValue {
 
     @Override
     public BigDecimal getRepresentVal(){
+
         return this.representVal;
     }
 

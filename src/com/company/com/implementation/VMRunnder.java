@@ -1,6 +1,8 @@
 package com.company.com.implementation;
 
+import com.company.com.money.Card;
 import com.company.com.money.Coin;
+import com.company.com.money.Note;
 
 import java.math.BigDecimal;
 import java.util.EnumMap;
@@ -10,12 +12,15 @@ public class VMRunnder {
     private SnackMachine vm;
     private Product selectedProd;
     private HashMap<Coin, Integer> enteredCoins;
+    private HashMap<Note, Integer> enteredNotes;
     private BigDecimal enteredSum;
     private Change yourChange;
+    private Card yourCard;
 
     public VMRunnder(SnackMachine vm) {
         this.vm = vm;
         this.enteredCoins = new HashMap<>();
+        this.enteredNotes = new HashMap<>();
         this.enteredSum = BigDecimal.valueOf(0.00);
     }
 
@@ -30,6 +35,7 @@ public class VMRunnder {
     }
 
     public Product getSelectedProd() {
+
         return selectedProd;
     }
 
@@ -48,6 +54,12 @@ public class VMRunnder {
         System.out.println("You have entered " + c + " ====> The total is now: " + enteredSum);
     }
 
+    public void enterNote(Note note) {
+        this.enteredNotes.put(note, this.enteredNotes.getOrDefault(note,0)+1);
+        this.setEnteredSum(calculateEnteredSum());
+        System.out.println("You have entered " + note + " ====> The total is now: " + enteredSum);
+    }
+
     public BigDecimal getEnteredSum() {
 
         return enteredSum;
@@ -64,7 +76,16 @@ public class VMRunnder {
     }
 
     public void setYourChange(Change yourChange) {
+
         this.yourChange = yourChange;
+    }
+
+    public Card getYourCard() {
+        return yourCard;
+    }
+
+    public void setYourCard(Card yourCard) {
+        this.yourCard = yourCard;
     }
 
     public void displayBalance(){
@@ -78,14 +99,17 @@ public class VMRunnder {
         for (EnumMap.Entry<Coin, Integer> entry : enteredCoins.entrySet()) {
             sum = sum.add(BigDecimal.valueOf(entry.getValue()).multiply(entry.getKey().getRepresentVal()));
         }
+        for (EnumMap.Entry<Note, Integer> entry : enteredNotes.entrySet()) {
+            sum = sum.add(BigDecimal.valueOf(entry.getValue()).multiply(entry.getKey().getRepresentVal()));
+        }
         return sum;
     }
 
     public void disposeSelectedProduct(){
         // dispense product
-        System.out.println(" DISPENSING:");
-        System.out.println("     " + selectedProd.getProductId() + "  " + selectedProd.getName() + " | " +
-                selectedProd.getQuantity() + "   ");
+        System.out.println(" DISPENSING: " + selectedProd.getName());
+        System.out.println("Its quantity is now at: " + selectedProd.getQuantity() + "   ");
+
     }
 
 

@@ -1,7 +1,5 @@
 package com.company.com.money;
 
-import com.company.com.implementation.Change;
-
 import java.math.BigDecimal;
 import java.util.EnumMap;
 
@@ -112,7 +110,6 @@ public class Card  {
         this.setCardBalance(calculateBalance());
 
         System.out.println("The payment has been done by " + this.number + " " + this.type);
-
 
     }
 }

@@ -158,7 +158,7 @@ public class Driver {
         // get the user input for the card number
         String number = getCard();
         // generate card type using the card number
-        String type = GetCreditCardType(number);
+        String type = getCreditCardType(number);
 
         Card card = new Card(number, type);
         // set card for this run
@@ -303,7 +303,7 @@ public class Driver {
      * @param CreditCardNumber the card number inputted by the user
      * @return the type of card this is
      */
-    private static String GetCreditCardType(String CreditCardNumber)
+    private static String getCreditCardType(String CreditCardNumber)
     {
         String regVisa = "^4[0-9]{12}(?:[0-9]{3})?$";
         String regMaster = "^5[1-5][0-9]{14}$";

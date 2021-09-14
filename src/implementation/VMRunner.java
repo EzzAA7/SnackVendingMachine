@@ -54,6 +54,14 @@ public class VMRunner implements VMRImplementation {
         return enteredCoins;
     }
 
+    public EnumMap<Note, Integer> getEnteredNotes() {
+        return enteredNotes;
+    }
+
+    public void setEnteredNotes(EnumMap<Note, Integer> enteredNotes) {
+        this.enteredNotes = enteredNotes;
+    }
+
     public BigDecimal getEnteredSum() {
 
         return enteredSum;
@@ -75,10 +83,12 @@ public class VMRunner implements VMRImplementation {
     }
 
     public Card getYourCard() {
+
         return yourCard;
     }
 
     public void setYourCard(Card yourCard) {
+
         this.yourCard = yourCard;
     }
 
@@ -111,7 +121,6 @@ public class VMRunner implements VMRImplementation {
     public void displayBalance(){
         System.out.println(" The current entered amount is: " + this.getEnteredSum());
         System.out.println(" ------------------------------------------ ");
-
     }
 
     /**

@@ -16,9 +16,14 @@ public class Driver {
 
     public static void main(String[] args) throws NoSuchMonetary {
 
-        try{
-            SnackMachine snackMachine = new SnackMachine();
+        SnackMachine snackMachine = new SnackMachine();
 
+        startMachine(snackMachine);
+
+    }
+
+    private static void startMachine(SnackMachine snackMachine) {
+        try{
             VMRunner vmr = new VMRunner(snackMachine);
             snackMachine.displayProducts();
 
@@ -41,50 +46,21 @@ public class Driver {
 
                 // check if in balance (if entered is not less than the price)
                 while(vmr.getEnteredSum().compareTo(chosenProduct.getPrice()) < 0){
-                    System.out.println(" ");
-                    System.out.println("Not enough in balance, start entering");
-                    System.out.println("Choose between one of the available money slots");
-                    System.out.println("\t\t (1) o\tCoinSlot: There are four denominations: • 10c • 20c • 50c • $1 ");
-                    if(choseMoney == false)
-                        System.out.println("\t\t (2) o\tCardSlot : all cards accepted ");
-                    System.out.println("\t\t (3) o\tNotes Slot :20$ and 50$ only");
-                    System.out.println(" ");
+                    setupSlotDecision(choseMoney);
 
                     int slot = getSlot();
                     BigDecimal money;
                     if(slot == 1){
-                        choseMoney = true;
-                        money = getMoney();
-                        Coin desiredCoin;
-                        if((desiredCoin = Coin.coinValue(money)) != Coin.EMPTY){
-                            vmr.enterCoin(desiredCoin);
-                        }
-                        else
-                            throw new NoSuchMonetary("No such coin, please enter a value among (0.10. 0.20, 0.50, 1) or use a different slot");
+                        choseMoney = handleCoinSlot(vmr);
                     }
 
                     else if(slot == 2 && choseMoney == false){
-                        String number = getCard();
-                        String type = GetCreditCardType(number);
-
-                        Card card = new Card(number, type);
-                        vmr.setYourCard(card);
-                        // check if card has enough
-                        if(card.getCardBalance().compareTo(chosenProduct.getPrice()) < 0){
-                            throw new NotSufficientFundsCard("Your card doesn't have enough funds.");
-                        }
+                        handleCardSlot(vmr, chosenProduct);
                         break;
                     }
 
                     else if(slot == 3){
-                        choseMoney = true;
-                        money = getMoney();
-                        Note desiredNote;
-                        if((desiredNote = Note.noteValue(money)) != Note.EMPTY){
-                            vmr.enterNote(desiredNote);
-                        }
-                        else
-                            throw new NoSuchMonetary("No such note, please enter a value among (20, 50");
+                        choseMoney = handleNoteSlot(vmr);
                     }
                     else{
                         throw new NoSuchSlot("Choose a valid slot, you have 3 to choose from");
@@ -93,37 +69,93 @@ public class Driver {
                     vmr.displayBalance();
                 }
 
-                // setup selected product
-                vmr.setSelectedProd(chosenProduct);
-                System.out.println(" ");
+                setupResult(snackMachine, vmr, chosenProduct);
 
-
-                // calculate how change will return to user (in coins)
-                // in case of using coins and notes there will be no known card and there will be possible change
-                if(vmr.getYourCard() == null) {
-                    // initialize change amount
-                    vmr.setYourChange(new Change(vmr.getEnteredSum().subtract(chosenProduct.getPrice())));
-                    snackMachine.calcChange(vmr.getYourChange());
-                    System.out.println(vmr.getYourChange().toString());
-                }
-                // in case of using a card there will be no change so immediately make payment
-                else{
-                    vmr.getYourCard().makePayment(chosenProduct.getPrice());
-                }
-
-                // decrement product quantity
-                chosenProduct.setQuantity(chosenProduct.getQuantity() -1);
-
-                // dispense product
-                vmr.disposeSelectedProduct();
             }
 
         }
         catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private static void setupSlotDecision(Boolean choseMoney) {
+        System.out.println(" ");
+        System.out.println("Not enough in balance, start entering");
+        System.out.println("Choose between one of the available money slots");
+        System.out.println("\t\t (1) o\tCoinSlot: There are four denominations: • 10c • 20c • 50c • $1 ");
+        if(choseMoney == false)
+            System.out.println("\t\t (2) o\tCardSlot : all cards accepted ");
+        System.out.println("\t\t (3) o\tNotes Slot :20$ and 50$ only");
+        System.out.println(" ");
+    }
+
+    private static Boolean handleNoteSlot(VMRunner vmr) throws NoSuchMonetary {
+        Boolean choseMoney;
+        BigDecimal money;
+        choseMoney = true;
+        money = getMoney();
+        Note desiredNote;
+        if((desiredNote = Note.noteValue(money)) != Note.EMPTY){
+            vmr.enterNote(desiredNote);
+        }
+        else
+            throw new NoSuchMonetary("No such note, please enter a value among (20, 50");
+        return choseMoney;
+    }
+
+    private static void handleCardSlot(VMRunner vmr, Product chosenProduct) throws NotPossibleCard, NotSufficientFundsCard {
+        String number = getCard();
+        String type = GetCreditCardType(number);
+
+        Card card = new Card(number, type);
+        vmr.setYourCard(card);
+        // check if card has enough
+        if(card.getCardBalance().compareTo(chosenProduct.getPrice()) < 0){
+            throw new NotSufficientFundsCard("Your card doesn't have enough funds.");
+        }
+        return;
+    }
+
+    private static Boolean handleCoinSlot(VMRunner vmr) throws NoSuchMonetary {
+        Boolean choseMoney;
+        BigDecimal money;
+        choseMoney = true;
+        money = getMoney();
+        Coin desiredCoin;
+
+        if((desiredCoin = Coin.coinValue(money)) != Coin.EMPTY){
+            vmr.enterCoin(desiredCoin);
+        }
+        else
+            throw new NoSuchMonetary("No such coin, please enter a value among (0.10. 0.20, 0.50, 1) or use a different slot");
+        return choseMoney;
+    }
+
+    private static void setupResult(SnackMachine snackMachine, VMRunner vmr, Product chosenProduct) throws NotEnoughChange {
+        // setup selected product
+        vmr.setSelectedProd(chosenProduct);
+        System.out.println(" ");
 
 
+        // calculate how change will return to user (in coins)
+        // in case of using coins and notes there will be no known card and there will be possible change
+        if(vmr.getYourCard() == null) {
+            // initialize change amount
+            vmr.setYourChange(new Change(vmr.getEnteredSum().subtract(chosenProduct.getPrice())));
+            snackMachine.calcChange(vmr.getYourChange());
+            System.out.println(vmr.getYourChange().toString());
+        }
+        // in case of using a card there will be no change so immediately make payment
+        else{
+            vmr.getYourCard().makePayment(chosenProduct.getPrice());
+        }
+
+        // decrement product quantity
+        chosenProduct.setQuantity(chosenProduct.getQuantity() -1);
+
+        // dispense product
+        vmr.disposeSelectedProduct();
     }
 
     private static Product checkProductValidity(SnackMachine snackMachine, String choice, VMRunner v) throws NoSuchProductException {

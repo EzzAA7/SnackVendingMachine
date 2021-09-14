@@ -77,9 +77,6 @@ public class VendingMachine {
         for (Map.Entry<Integer, Product> entry : products.entrySet()) {
             System.out.println("    - " + entry.getValue().getProductId() + " -  " + entry.getValue().getName() + " | " + entry.getValue().getPrice() + " Shekels   " + " (Quantity: " + entry.getValue().getQuantity() + ")");
         }
-
-        System.out.println("                                              ");
-        System.out.println(" --- Please select a product (type its id) --- ");
     }
 
     public void calcChange(Change c){

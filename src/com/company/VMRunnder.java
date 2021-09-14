@@ -56,6 +56,7 @@ public class VMRunnder {
     }
 
     public Change getYourChange() {
+
         return yourChange;
     }
 
@@ -76,4 +77,13 @@ public class VMRunnder {
         }
         return sum;
     }
+
+    public void disposeSelectedProduct(){
+        // dispense product
+        System.out.println(" DISPENSING:");
+        System.out.println("     " + selectedProd.getProductId() + "  " + selectedProd.getName() + " | " +
+                selectedProd.getQuantity() + "   ");
+    }
+
+
 }

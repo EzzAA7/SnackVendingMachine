@@ -22,23 +22,23 @@ public class Driver {
         VMRunnder vmr = new VMRunnder(vendingMachine);
         vendingMachine.displayProducts();
 
-//        vmr.enterCoin(Coin.TEN_SHEKELS);
-//        vmr.enterCoin(Coin.TEN_SHEKELS);
-//        vmr.enterCoin(Coin.TEN_SHEKELS);
-//        vmr.enterCoin(Coin.TEN_SHEKELS);
-//        vmr.enterCoin(Coin.TWO_SHEKELS);
+        vmr.enterCoin(Coin.ONE_DOLLAR);
+        vmr.enterCoin(Coin.ONE_DOLLAR);
+        vmr.enterCoin(Coin.ONE_DOLLAR);
+        vmr.enterCoin(Coin.ONE_DOLLAR);
+        vmr.enterCoin(Coin.ONE_DOLLAR);
 
         int choice = inputProductAndBalance(vmr);
 
         Product chosenProduct = checkProductValidity(vendingMachine, choice, vmr);
 
-        // check if in balance
-        if(vmr.getEnteredSum() < chosenProduct.getPrice()){
+        // check if in balance (if entered is not less than the price)
+        if(vmr.getEnteredSum().compareTo(chosenProduct.getPrice()) < 0){
             System.out.println("Not enough in balance, start entering");
         }
 
         // check if vending machine has enough money to return change
-        else if(vendingMachine.getBalance() < vmr.getEnteredSum() - chosenProduct.getPrice()){
+        else if(vendingMachine.getBalance().compareTo(vmr.getEnteredSum().subtract(chosenProduct.getPrice())) < 0){
             System.out.println("Vending machine doesn't have enough change, contact admin");
         }
 
@@ -53,7 +53,7 @@ public class Driver {
                 vmr.setSelectedProd(chosenProduct);
 
                 // initialize change amount
-                vmr.setYourChange(new Change(vmr.getEnteredSum() - chosenProduct.getPrice()));
+                vmr.setYourChange(new Change(vmr.getEnteredSum().subtract(chosenProduct.getPrice())));
 
                 // calculate how change will return to user (in coins)
                 vendingMachine.calcChange(vmr.getYourChange());

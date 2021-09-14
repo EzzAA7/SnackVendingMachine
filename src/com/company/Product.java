@@ -1,12 +1,14 @@
 package com.company;
 
+import java.math.BigDecimal;
+
 public class Product {
     private int productId;
     private String name;
-    private int price;
+    private BigDecimal price;
     private int quantity;
 
-    Product(int productId, String name, int price, int quantity){
+    Product(int productId, String name, BigDecimal price, int quantity){
         this.productId = productId;
         this.name = name;
         this.price = price;
@@ -28,7 +30,7 @@ public class Product {
         return productId;
     }
 
-    public int getPrice(){
+    public BigDecimal getPrice(){
 
         return this.price;
     }

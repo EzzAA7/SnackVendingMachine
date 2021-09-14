@@ -1,15 +1,17 @@
 package com.company;
 
+import java.math.BigDecimal;
+
 public enum Coin {
-    ONE_SHEKELS(1), TWO_SHEKELS(2),  FIVE_SHEKELS(5), TEN_SHEKELS(10);
+    TEN_CENTS(BigDecimal.valueOf(0.10)), TWENTY_CENTS(BigDecimal.valueOf(0.20)),  FIFTY_CENTS(BigDecimal.valueOf(0.50)), ONE_DOLLAR(BigDecimal.valueOf(1.00));
 
-    private int representVal;
+    private BigDecimal representVal;
 
-    Coin(int representVal){
+    Coin(BigDecimal representVal){
         this.representVal = representVal;
     }
 
-    public int getRepresentVal(){
+    public BigDecimal getRepresentVal(){
         return this.representVal;
     }
 }

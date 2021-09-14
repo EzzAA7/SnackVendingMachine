@@ -1,5 +1,6 @@
 package com.company;
 
+import java.math.BigDecimal;
 import java.util.EnumMap;
 import java.util.HashMap;
 
@@ -7,13 +8,13 @@ public class VMRunnder {
     private VendingMachine vm;
     private Product selectedProd;
     private HashMap<Coin, Integer> enteredCoins;
-    private int enteredSum;
+    private BigDecimal enteredSum;
     private Change yourChange;
 
     public VMRunnder(VendingMachine vm) {
         this.vm = vm;
         this.enteredCoins = new HashMap<>();
-        this.enteredSum = 0;
+        this.enteredSum = BigDecimal.valueOf(0.00);
     }
 
     public VendingMachine getVm() {
@@ -45,12 +46,12 @@ public class VMRunnder {
         System.out.println("You have entered " + c + " ====> The total is now: " + enteredSum);
     }
 
-    public int getEnteredSum() {
+    public BigDecimal getEnteredSum() {
 
         return enteredSum;
     }
 
-    public void setEnteredSum(int enteredSum) {
+    public void setEnteredSum(BigDecimal enteredSum) {
 
         this.enteredSum = enteredSum;
     }
@@ -70,10 +71,10 @@ public class VMRunnder {
 
     }
 
-    private int calculateEnteredSum() {
-        int sum = 0;
+    private BigDecimal calculateEnteredSum() {
+        BigDecimal sum = BigDecimal.valueOf(0.00);
         for (EnumMap.Entry<Coin, Integer> entry : enteredCoins.entrySet()) {
-            sum += entry.getValue() * entry.getKey().getRepresentVal();
+            sum = sum.add(BigDecimal.valueOf(entry.getValue()).multiply(entry.getKey().getRepresentVal()));
         }
         return sum;
     }

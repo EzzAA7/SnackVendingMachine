@@ -2,6 +2,10 @@ package implementation;
 
 import java.math.BigDecimal;
 
+/**
+ * Class describing the transaction change
+ * its includes the receipt coins in a map and the amount itself
+ */
 public class Change {
     private BigDecimal amount;
     private int[] numOfCoins;
@@ -31,6 +35,9 @@ public class Change {
         this.numOfCoins = numOfCoins;
     }
 
+    /**
+     * @return String representation of the returned coins/notes
+     */
     @Override
     public String toString() {
         return "Amount of Change: " + amount +

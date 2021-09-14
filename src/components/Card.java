@@ -9,6 +9,11 @@ public class Card  {
     private EnumMap<Note, Integer> cardNotes;
     private BigDecimal cardBalance;
 
+    /**
+     * initializes a card with empty setupCardMoney, a number and a type
+     * fills the card with notes
+     * calculates the balance following the filling
+     */
     public Card (String number, String type) {
         this.number = number;
         this.type = type;
@@ -49,6 +54,12 @@ public class Card  {
         this.cardBalance = cardBalance;
     }
 
+    /**
+     * Iterates the values in the cardNotes map and calculates the the value of each
+     * note as its quantity multiplied by its representation
+     * and each calculated value is added to the sum
+     * @return the decimal summation of the balance values
+     */
     public BigDecimal calculateBalance() {
         BigDecimal sum = BigDecimal.valueOf(0.00);
         for (EnumMap.Entry<Note, Integer> entry : cardNotes.entrySet()) {
@@ -57,14 +68,23 @@ public class Card  {
         return sum;
     }
 
+    /**
+     * fills the card with random amount of 50s and 20s
+     */
     public void setupCardMoney() {
         cardNotes.put(Note.FIFTY_DOLLARS, 0 + (int)(Math.random() * ((10 - 0) + 1)));
         cardNotes.put(Note.TWENTY_DOLLARS, 0 + (int)(Math.random() * ((10 - 0) + 1)));
     }
 
+    /**
+     * Calculates how much of each note is need to satisfy the needed amount
+     * decrements the needed notes from their map
+     * updates the card balance
+     * @param amount the price for the product to be purchased
+     */
     public void makePayment(BigDecimal amount){
         
-        int[] res = new int[6];
+        int[] res = new int[2];
 
         // FOR THE 50 DOLLARS EQUIVALENT
 

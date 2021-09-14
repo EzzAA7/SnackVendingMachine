@@ -18,6 +18,10 @@ public class VMRunner implements VMRImplementation {
     private Change yourChange;
     private Card yourCard;
 
+    /**
+     * initializes a vending machine runner with empty enteredCoins and enteredNotes
+     * initializes the entered sum with 0
+     */
     public VMRunner(SnackMachine vm) {
         this.vm = vm;
         this.enteredCoins = new HashMap<>();
@@ -77,6 +81,10 @@ public class VMRunner implements VMRImplementation {
         this.yourCard = yourCard;
     }
 
+    /**
+     * adds the user's inserted coin in the runner's coins and recalculates the balance
+     * @param c the coin that was just inserted
+     */
     @Override
     public void enterCoin(Coin c) {
         this.enteredCoins.put(c, this.enteredCoins.getOrDefault(c,0)+1);
@@ -84,6 +92,10 @@ public class VMRunner implements VMRImplementation {
         System.out.println("You have entered " + c + " ====> The total is now: " + enteredSum);
     }
 
+    /**
+     * adds the user's inserted note in the runner's note and recalculates the balance
+     * @param note the note that was just inserted
+     */
     @Override
     public void enterNote(Note note) {
         this.enteredNotes.put(note, this.enteredNotes.getOrDefault(note,0)+1);
@@ -91,6 +103,9 @@ public class VMRunner implements VMRImplementation {
         System.out.println("You have entered " + note + " ====> The total is now: " + enteredSum);
     }
 
+    /**
+     * displays the current balance at a given time
+     */
     @Override
     public void displayBalance(){
         System.out.println(" The current entered amount is: " + this.getEnteredSum());
@@ -98,6 +113,15 @@ public class VMRunner implements VMRImplementation {
 
     }
 
+    /**
+     * Iterates the values in the enteredCoins map and calculates the the value of each
+     * coin as its quantity multiplied by its representation
+     * and each calculated value is added to the same
+     * Also iterates similarly through enteredNotes map and calculates the the value of each
+     * note as its quantity multiplied by its representation
+     * and each calculated value is added to the sum
+     * @return the decimal summation of entered money
+     */
     @Override
     public BigDecimal calculateEnteredSum() {
         BigDecimal sum = BigDecimal.valueOf(0.00);
@@ -110,6 +134,9 @@ public class VMRunner implements VMRImplementation {
         return sum;
     }
 
+    /**
+     * displays the disposing of the selected product once everything else is done
+     */
     @Override
     public void disposeSelectedProduct(){
         // dispense product

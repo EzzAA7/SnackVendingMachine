@@ -15,6 +15,12 @@ public class SnackMachine implements SnackMachineInterface {
     private HashMap<String, Product> products;
     private BigDecimal balance;
 
+    /**
+     * initializes a vending machine with empty balanceCoins, balanceNotes and products
+     * fills the machine with money coins and notes
+     * fills the machine with products
+     * calculates the starting balance following the filling
+     */
     public SnackMachine() {
         this.balanceCoins = new EnumMap<>(Coin.class);
         this.balanceNotes = new EnumMap<>(Note.class);
@@ -54,6 +60,15 @@ public class SnackMachine implements SnackMachineInterface {
         this.products = products;
     }
 
+    /**
+     * Iterates the values in the balanceCoins map and calculates the the value of each
+     * coin as its quantity multiplied by its representation
+     * and each calculated value is added to the sum
+     * Also iterates similarly through balanceNotes map and calculates the the value of each
+     * note as its quantity multiplied by its representation
+     * and each calculated value is added to the sum
+     * @return the decimal summation of balance
+     */
     @Override
     public BigDecimal calculateBalance() {
         BigDecimal sum = BigDecimal.valueOf(0.00);
@@ -69,16 +84,21 @@ public class SnackMachine implements SnackMachineInterface {
 
     @Override
     public void setupMachineMoney() {
+        // fill with coins
         balanceCoins.put(Coin.ONE_DOLLAR, 6);
         balanceCoins.put(Coin.FIFTY_CENTS, 4);
         balanceCoins.put(Coin.TWENTY_CENTS, 5);
         balanceCoins.put(Coin.TEN_CENTS, 10);
 
+        // fill with notes
         balanceNotes.put(Note.FIFTY_DOLLARS, 2);
         balanceNotes.put(Note.TWENTY_DOLLARS, 5);
 
     }
 
+    /**
+     * fills machine's products by populating the products map
+     */
     @Override
     public void fillMachineProducts() {
         products.put("A1", new Product("A1", "TWIX", BigDecimal.valueOf(4.50), 3));
@@ -108,6 +128,9 @@ public class SnackMachine implements SnackMachineInterface {
         products.put("E5", new Product("E5", "SPRITE", BigDecimal.valueOf(2.90), 7));
     }
 
+    /**
+     * displays the products in a 5*5 matrix
+     */
     @Override
     public void displayProducts() {
         System.out.println(" \t\t\t\t\t\t*********************************************");
@@ -152,6 +175,14 @@ public class SnackMachine implements SnackMachineInterface {
         }
     }
 
+    /**
+     * Calculates how much of each note/coin is need to satisfy the change amount
+     * decrements the needed notes/coins from their maps
+     * updates the machine balance
+     * @param c the Change object which has the calculatd change amount
+     * @throws NotEnoughChange in case the machine's coins/notes are not enough to give change
+     * even if within the full balance
+     */
     @Override
     public void calcChange(Change c) throws NotEnoughChange {
 
@@ -279,6 +310,8 @@ public class SnackMachine implements SnackMachineInterface {
             }
         }
 
+        // the amount should be equal to 0 in case the numbers in res are enough to give change
+        // otherwise throw an exception for lack of balance
         if(amount.compareTo(BigDecimal.valueOf(0.00) ) != 0){
             throw new NotEnoughChange("Not enough change is available, contact the admin");
         }

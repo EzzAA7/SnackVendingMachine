@@ -18,6 +18,11 @@ public enum Note implements MonetaryValue {
         return this.representVal;
     }
 
+    /**
+     * checks if such a note value exists
+     * @param val the user inputted note value
+     * @return the note representing the inputted value
+     */
     public static Note noteValue(BigDecimal val){
         for(Note note: Note.values()){
             if(val.compareTo(note.getRepresentVal()) == 0){

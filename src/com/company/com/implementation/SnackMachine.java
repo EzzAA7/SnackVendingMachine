@@ -10,7 +10,7 @@ public class SnackMachine {
 
     private EnumMap<Coin, Integer> balanceCoins;
     private EnumMap<Note, Integer> balanceNotes;
-    private HashMap<Integer, Product> products;
+    private HashMap<String, Product> products;
     private BigDecimal balance;
 
     public SnackMachine() {
@@ -42,12 +42,12 @@ public class SnackMachine {
         this.balanceCoins = balanceCoins;
     }
 
-    public HashMap<Integer, Product> getProducts() {
+    public HashMap<String, Product> getProducts() {
 
         return products;
     }
 
-    public void setProducts(HashMap<Integer, Product> products) {
+    public void setProducts(HashMap<String, Product> products) {
 
         this.products = products;
     }
@@ -76,71 +76,68 @@ public class SnackMachine {
     }
 
     public void fillMachineProducts() {
-        products.put(1, new Product(1, "TWIX", BigDecimal.valueOf(4.50), 3));
-        products.put(2, new Product(2, "KITKAT", BigDecimal.valueOf(4.30), 5));
-        products.put(3, new Product(3, "XL", BigDecimal.valueOf(5.50), 10));
-        products.put(4, new Product(4, "WATER", BigDecimal.valueOf(1.70), 2));
-        products.put(5, new Product(5, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(6, new Product(6, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(7, new Product(7, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(8, new Product(8, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(9, new Product(9, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(10, new Product(10, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(11, new Product(11, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(12, new Product(12, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(13, new Product(13, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(14, new Product(14, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(15, new Product(15, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(16, new Product(16, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(17, new Product(17, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(18, new Product(18, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(19, new Product(19, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(20, new Product(20, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(21, new Product(21, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(22, new Product(22, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(23, new Product(23, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(24, new Product(24, "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put(25, new Product(25, "SPRITE", BigDecimal.valueOf(2.90), 7));
+        products.put("A1", new Product("A1", "TWIX", BigDecimal.valueOf(4.50), 3));
+        products.put("A2", new Product("A2", "KITKAT", BigDecimal.valueOf(4.30), 5));
+        products.put("A3", new Product("A3", "XL", BigDecimal.valueOf(5.50), 10));
+        products.put("A4", new Product("A4", "WATER", BigDecimal.valueOf(1.70), 2));
+        products.put("A5", new Product("A5", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("B1", new Product("B1", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("B2", new Product("B2", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("B3", new Product("B3", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("B4", new Product("B4", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("B5", new Product("B5", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("C1", new Product("C1", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("C2", new Product("C2", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("C3", new Product("C3", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("C4", new Product("C4", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("C5", new Product("C5", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("D1", new Product("D1", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("D2", new Product("D2", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("D3", new Product("D3", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("D4", new Product("D4", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("D5", new Product("D5", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("E1", new Product("E1", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("E2", new Product("E2", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("E3", new Product("E3", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("E4", new Product("E4", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
+        products.put("E5", new Product("E5", "SPRITE", BigDecimal.valueOf(2.90), 7));
     }
 
     public void displayProducts() {
         System.out.println(" \t\t\t\t\t\t*********************************************");
         System.out.println(" \t\t\t\t\t\t    WELCOME TO THE FREIGHTOS VENDING MACHINE           ");
         System.out.println("\t\t\t\t\t\t *********************************************");
-        System.out.printf("\t\t\t\t\t\t %-25s", "_________________ Our available products _________________");
+        System.out.printf("\t\t\t\t\t %-25s", "________________________________ Our available products ________________________________");
         System.out.println("                                              ");
 
-        for (int i=1; i<= products.size() ; i+=5) {
-            System.out.printf(
-                    "\t\t\t\t || %-15s | %-15s | %-15s | %-15s | %-15s ||", i, (i+1), (i+2) , (i+3), (i+4));
-            System.out.println(" ");
+        char row = 'A';
+        int i = 1;
+        System.out.printf(
+                "\t\t\t\t || %-15s | %-15s | %-15s | %-15s | %-15s ||", i, (i+1), (i+2) , (i+3), (i+4));
+        System.out.println(" ");
+
+        for (; row <= 'E' ; row+=1) {
             System.out.println("\t\t\t\t----------------------------------------------------------------------------------------------");
 
-//            System.out.println(" ");
+            System.out.printf("\t\t (" + row + ")");
 
             System.out.printf(
-                    "\t\t\t\t || %-15s | %-15s | %-15s | %-15s | %-15s ||", products.get(i).getName(),
-                    products.get(i+1).getName(), products.get(i+2).getName() , products.get(i+3).getName(),
-                    products.get(i+4).getName() );
+                    "\t || %-15s | %-15s | %-15s | %-15s | %-15s ||", products.get(""+row+i).getName(),
+                    products.get(""+row+(i+1)).getName(), products.get(""+row+(i+2)).getName() , products.get(""+row+(i+3)).getName(),
+                    products.get(""+row+(i+4)).getName() );
 
             System.out.println(" ");
             System.out.printf(
-                    "\t\t\t\t || $%-14s | $%-14s | $%-14s | $%-14s | $%-14s ||", products.get(i).getPrice(),
-                    products.get(i+1).getPrice(), products.get(i+2).getPrice() , products.get(i+3).getPrice(),
-                    products.get(i+4).getPrice() );
+                    "\t\t\t\t || $%-14s | $%-14s | $%-14s | $%-14s | $%-14s ||", products.get(""+row+(i)).getPrice(),
+                    products.get(""+row+(i+1)).getPrice(), products.get(""+row+(i+2)).getPrice() , products.get(""+row+(i+3)).getPrice(),
+                    products.get(""+row+(i+4)).getPrice() );
 
             System.out.println(" ");
             System.out.printf(
                     "\t\t\t\t || Quantity: %-5s | Quantity: %-5s | Quantity: %-5s | Quantity: %-5s | Quantity: %-5s ||",
-                    products.get(i).getQuantity(),
-                    products.get(i+1).getQuantity(), products.get(i+2).getQuantity() , products.get(i+3).getQuantity(),
-                    products.get(i+4).getQuantity() );
-//            System.out.println(
-//                    "\t\t || " + " (Quantity: "  + products.get(i).getQuantity() +
-//                    "\t\t | " + " (Quantity: "  + products.get(i+1).getQuantity() +
-//                    "\t\t | " + " (Quantity: "  + products.get(i+2).getQuantity() +
-//                    "\t\t | " + " (Quantity: "  + products.get(i+3).getQuantity() +
-//                    "\t\t || " + " (Quantity: "  + products.get(i+4).getQuantity() );
+                    products.get(""+row+(i)).getQuantity(),
+                    products.get(""+row+(i+1)).getQuantity(), products.get(""+row+(i+2)).getQuantity() , products.get(""+row+(i+3)).getQuantity(),
+                    products.get(""+row+(i+4)).getQuantity() );
 
             System.out.println(" ");
             System.out.println("\t\t\t\t==============================================================================================");

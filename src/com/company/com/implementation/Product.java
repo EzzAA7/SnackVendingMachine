@@ -3,12 +3,12 @@ package com.company.com.implementation;
 import java.math.BigDecimal;
 
 public class Product {
-    private int productId;
+    private String productId;
     private String name;
     private BigDecimal price;
     private int quantity;
 
-    Product(int productId, String name, BigDecimal price, int quantity){
+    Product(String productId, String name, BigDecimal price, int quantity){
         this.productId = productId;
         this.name = name;
         this.price = price;
@@ -25,7 +25,7 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public int getProductId(){
+    public String getProductId(){
 
         return productId;
     }

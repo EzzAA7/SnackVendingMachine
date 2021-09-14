@@ -22,7 +22,7 @@ public class Driver {
             VMRunnder vmr = new VMRunnder(snackMachine);
             snackMachine.displayProducts();
 
-            int choice = inputProductAndBalance(vmr);
+            String choice = inputProductAndBalance(vmr);
 
             Product chosenProduct = checkProductValidity(snackMachine, choice, vmr);
 
@@ -123,7 +123,7 @@ public class Driver {
 
     }
 
-    private static Product checkProductValidity(SnackMachine snackMachine, int choice, VMRunnder v) throws NoSuchProductException {
+    private static Product checkProductValidity(SnackMachine snackMachine, String choice, VMRunnder v) throws NoSuchProductException {
         Product chosenProduct = snackMachine.getProducts().get(choice);
 
         // checking validity of such a product
@@ -138,19 +138,19 @@ public class Driver {
         return chosenProduct;
     }
 
-    private static int inputProductAndBalance(VMRunnder vmr) {
+    private static String inputProductAndBalance(VMRunnder vmr) {
         System.out.println("                                              ");
-        System.out.println(" --- Please select a product (type its id) --- ");
+        System.out.println(" --- Please select a product (type its selection number) --- ");
 
-        int choice = getChoice();
+        String choice = getChoice();
 
         return choice;
     }
 
-    private static int getChoice() {
-        int choice;
+    private static String getChoice() {
+        String choice;
         Scanner s = new Scanner(System.in);
-        choice = s.nextInt();
+        choice = s.nextLine();
         return choice;
     }
 

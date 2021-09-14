@@ -2,7 +2,7 @@ package com.company.com.money;
 
 import java.math.BigDecimal;
 
-public enum Note {
+public enum Note implements MonetaryValue{
     TWENTY_DOLLARS(BigDecimal.valueOf(20.00)), FIFTY_DOLLARS(BigDecimal.valueOf(50.00)), EMPTY(BigDecimal.valueOf(0.00));
 
     private BigDecimal representVal;
@@ -11,6 +11,7 @@ public enum Note {
         this.representVal = representVal;
     }
 
+    @Override
     public BigDecimal getRepresentVal(){
         return this.representVal;
     }

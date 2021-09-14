@@ -80,7 +80,6 @@ public class Driver {
                         choseMoney = true;
                         money = getMoney();
                         Note desiredNote;
-                        Coin desiredCoin;
                         if((desiredNote = Note.noteValue(money)) != Note.EMPTY){
                             vmr.enterNote(desiredNote);
                         }

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.EnumMap;
 import java.util.HashMap;
 
-public class VMRunnder {
+public class VMRunner {
     private SnackMachine vm;
     private Product selectedProd;
     private HashMap<Coin, Integer> enteredCoins;
@@ -17,7 +17,7 @@ public class VMRunnder {
     private Change yourChange;
     private Card yourCard;
 
-    public VMRunnder(SnackMachine vm) {
+    public VMRunner(SnackMachine vm) {
         this.vm = vm;
         this.enteredCoins = new HashMap<>();
         this.enteredNotes = new HashMap<>();

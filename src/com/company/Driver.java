@@ -3,7 +3,7 @@ package com.company;
 import com.company.com.implementation.Change;
 import com.company.com.implementation.Product;
 import com.company.com.implementation.SnackMachine;
-import com.company.com.implementation.VMRunnder;
+import com.company.com.implementation.VMRunner;
 import com.company.com.money.Card;
 import com.company.com.money.Coin;
 import com.company.com.money.Note;
@@ -19,12 +19,13 @@ public class Driver {
         try{
             SnackMachine snackMachine = new SnackMachine();
 
-            VMRunnder vmr = new VMRunnder(snackMachine);
+            VMRunner vmr = new VMRunner(snackMachine);
             snackMachine.displayProducts();
 
             String choice = inputProductAndBalance(vmr);
 
             Product chosenProduct = checkProductValidity(snackMachine, choice, vmr);
+            Boolean choseMoney = false;
 
             // check if vending machine has enough money to return change
             if(snackMachine.getBalance().compareTo(vmr.getEnteredSum().subtract(chosenProduct.getPrice())) < 0){
@@ -44,13 +45,15 @@ public class Driver {
                     System.out.println("Not enough in balance, start entering");
                     System.out.println("Choose between one of the available money slots");
                     System.out.println("\t\t (1) o\tCoinSlot: There are four denominations: • 10c • 20c • 50c • $1 ");
-                    System.out.println("\t\t (2) o\tCardSlot : all cards accepted ");
+                    if(choseMoney == false)
+                        System.out.println("\t\t (2) o\tCardSlot : all cards accepted ");
                     System.out.println("\t\t (3) o\tNotes Slot :20$ and 50$ only");
                     System.out.println(" ");
 
                     int slot = getSlot();
                     BigDecimal money;
                     if(slot == 1){
+                        choseMoney = true;
                         money = getMoney();
                         Coin desiredCoin;
                         if((desiredCoin = Coin.coinValue(money)) != Coin.EMPTY){
@@ -60,7 +63,7 @@ public class Driver {
                             throw new NoSuchMonetary("No such coin, please enter a value among (0.10. 0.20, 0.50, 1) or use a different slot");
                     }
 
-                    else if(slot == 2){
+                    else if(slot == 2 && choseMoney == false){
                         String number = getCard();
                         String type = GetCreditCardType(number);
 
@@ -74,6 +77,7 @@ public class Driver {
                     }
 
                     else if(slot == 3){
+                        choseMoney = true;
                         money = getMoney();
                         Note desiredNote;
                         Coin desiredCoin;
@@ -123,7 +127,7 @@ public class Driver {
 
     }
 
-    private static Product checkProductValidity(SnackMachine snackMachine, String choice, VMRunnder v) throws NoSuchProductException {
+    private static Product checkProductValidity(SnackMachine snackMachine, String choice, VMRunner v) throws NoSuchProductException {
         Product chosenProduct = snackMachine.getProducts().get(choice);
 
         // checking validity of such a product
@@ -138,7 +142,7 @@ public class Driver {
         return chosenProduct;
     }
 
-    private static String inputProductAndBalance(VMRunnder vmr) {
+    private static String inputProductAndBalance(VMRunner vmr) {
         System.out.println("                                              ");
         System.out.println(" --- Please select a product (type its selection number) --- ");
 

@@ -12,8 +12,8 @@ import java.util.HashMap;
 public class VMRunner implements VMRImplementation {
     private SnackMachine vm;
     private Product selectedProd;
-    private HashMap<Coin, Integer> enteredCoins;
-    private HashMap<Note, Integer> enteredNotes;
+    private EnumMap<Coin, Integer> enteredCoins;
+    private EnumMap<Note, Integer> enteredNotes;
     private BigDecimal enteredSum;
     private Change yourChange;
     private Card yourCard;
@@ -24,8 +24,8 @@ public class VMRunner implements VMRImplementation {
      */
     public VMRunner(SnackMachine vm) {
         this.vm = vm;
-        this.enteredCoins = new HashMap<>();
-        this.enteredNotes = new HashMap<>();
+        this.enteredCoins = new EnumMap<>(Coin.class);
+        this.enteredNotes = new EnumMap<>(Note.class);
         this.enteredSum = BigDecimal.valueOf(0.00);
     }
 
@@ -45,10 +45,11 @@ public class VMRunner implements VMRImplementation {
     }
 
     public void setSelectedProd(Product selectedProd) {
+
         this.selectedProd = selectedProd;
     }
 
-    public HashMap<Coin, Integer> getEnteredCoins() {
+    public EnumMap<Coin, Integer> getEnteredCoins() {
 
         return enteredCoins;
     }

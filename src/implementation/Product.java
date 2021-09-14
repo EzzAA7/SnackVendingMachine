@@ -1,5 +1,7 @@
 package implementation;
 
+import exceptions.NoSuchProductException;
+
 import java.math.BigDecimal;
 
 public class Product {
@@ -40,7 +42,22 @@ public class Product {
     }
 
     public void setName(String name) {
+
         this.name = name;
+    }
+
+    public Product checkProductValidity(SnackMachine snackMachine, String choice, VMRunner v, Product chosenProduct) throws NoSuchProductException {
+
+        // checking validity of such a product
+        if(chosenProduct == null){
+            throw new NoSuchProductException("No such product, try again");
+        }
+        else {
+            System.out.println(" ");
+            System.out.println("The selected product is the following:");
+            System.out.println("     " + chosenProduct.getProductId() + "  " + chosenProduct.getName() + " | " + chosenProduct.getPrice() + " $   ");
+        }
+        return chosenProduct;
     }
 
 }

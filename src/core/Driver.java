@@ -20,7 +20,8 @@ public class Driver {
      * @param args
      * @throws NoSuchMonetary
      */
-    public static void main(String[] args) throws NoSuchMonetary {
+    public static void main(String[] args) throws NoSuchMonetary, NotPossibleCard, NoSuchSlot,
+            NotEnoughInStock, NotEnoughChange, NotSufficientFundsCard, NoSuchProductException {
 
         SnackMachine snackMachine = new SnackMachine();
         startMachine(snackMachine);
@@ -36,14 +37,16 @@ public class Driver {
      * and finally dispensing the product
      * @param snackMachine the main machine
      */
-    private static void startMachine(SnackMachine snackMachine) {
-        try{
-            VMRunner vmr = new VMRunner(snackMachine);
+    private static void startMachine(SnackMachine snackMachine) throws NoSuchProductException, NoSuchMonetary, NotEnoughInStock, NotEnoughChange, NotPossibleCard, NotSufficientFundsCard, NoSuchSlot {
+
+        VMRunner vmr = new VMRunner(snackMachine);
             snackMachine.displayProducts();
 
             String choice = inputProduct(vmr);
 
-            Product chosenProduct = checkProductValidity(snackMachine, choice, vmr);
+            Product chosenProduct = snackMachine.getProducts().get(choice);
+
+            chosenProduct = chosenProduct.checkProductValidity(snackMachine, choice, vmr, chosenProduct);
             Boolean choseMoney = false;
 
             // check if vending machine has enough money to return change
@@ -99,10 +102,8 @@ public class Driver {
 
             }
 
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+
+
     }
 
     /**
@@ -216,21 +217,6 @@ public class Driver {
 
         // dispense product
         vmr.disposeSelectedProduct();
-    }
-
-    private static Product checkProductValidity(SnackMachine snackMachine, String choice, VMRunner v) throws NoSuchProductException {
-        Product chosenProduct = snackMachine.getProducts().get(choice);
-
-        // checking validity of such a product
-        if(chosenProduct == null){
-            throw new NoSuchProductException("No such product, try again");
-        }
-        else {
-            System.out.println(" ");
-            System.out.println("The selected product is the following:");
-            System.out.println("     " + chosenProduct.getProductId() + "  " + chosenProduct.getName() + " | " + chosenProduct.getPrice() + " $   ");
-        }
-        return chosenProduct;
     }
 
     /**

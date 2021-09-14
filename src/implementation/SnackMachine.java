@@ -190,137 +190,140 @@ public class SnackMachine implements SnackMachineInterface {
 
         int[] res = new int[6];
 
-        // FOR THE 50 DOLLARS EQUIVALENT
+            // FOR THE 50 DOLLARS EQUIVALENT
 
-        // Check if we have 10s in our balance inventory in the first place
-        if(this.balanceNotes.get(Note.FIFTY_DOLLARS) > 0){
-            // If the num of 50s in our inventory is higher than 50s in the entered sum we can use as much as possible
-            if(this.balanceNotes.get(Note.FIFTY_DOLLARS) >= amount.divide(Note.FIFTY_DOLLARS.getRepresentVal()).intValue()) {
-                res[0] = amount.divide(Note.FIFTY_DOLLARS.getRepresentVal()).intValue();
+            // Check if we have 10s in our balance inventory in the first place
+            if (this.balanceNotes.get(Note.FIFTY_DOLLARS) > 0) {
+                // If the num of 50s in our inventory is higher than 50s in the entered sum we can use as much as possible
+                if (this.balanceNotes.get(Note.FIFTY_DOLLARS) >= amount.divide(Note.FIFTY_DOLLARS.getRepresentVal()).intValue()) {
+                    res[0] = amount.divide(Note.FIFTY_DOLLARS.getRepresentVal()).intValue();
+                }
+                // if not then use all possible 50s
+                else
+                    res[0] = this.balanceNotes.get(Note.FIFTY_DOLLARS);
+                // the amount is updated to go forward with next coins
+
+                // the balance inventory is decremented is case we have a new value for the num of 50s
+                if (res[0] > 0) {
+                    amount = amount.subtract(Note.FIFTY_DOLLARS.getRepresentVal().multiply(BigDecimal.valueOf(res[0])));
+                    this.balanceNotes.put(Note.FIFTY_DOLLARS, this.balanceNotes.get(Note.FIFTY_DOLLARS) - res[0]);
+                }
             }
-            // if not then use all possible 50s
-            else
-                res[0] = this.balanceNotes.get(Note.FIFTY_DOLLARS);
-            // the amount is updated to go forward with next coins
 
-            // the balance inventory is decremented is case we have a new value for the num of 50s 
-            if(res[0] > 0){
-                amount = amount.subtract(Note.FIFTY_DOLLARS.getRepresentVal().multiply(BigDecimal.valueOf(res[0])));
-                this.balanceNotes.put(Note.FIFTY_DOLLARS, this.balanceNotes.get(Note.FIFTY_DOLLARS) - res[0]);
+            // FOR THE 20 DOLLARS EQUIVALENT
+
+            // Check if we have 10s in our balance inventory in the first place
+            if (this.balanceNotes.get(Note.TWENTY_DOLLARS) > 0) {
+                // If the num of 20s in our inventory is higher than 20s in the entered sum we can use as much as possible
+                if (this.balanceNotes.get(Note.TWENTY_DOLLARS) >= amount.divide(Note.TWENTY_DOLLARS.getRepresentVal()).intValue()) {
+                    res[1] = amount.divide(Note.TWENTY_DOLLARS.getRepresentVal()).intValue();
+                }
+                // if not then use all possible 20s
+                else
+                    res[1] = this.balanceNotes.get(Note.TWENTY_DOLLARS);
+                // the amount is updated to go forward with next coins
+
+                // the balance inventory is decremented is case we have a new value for the num of 20s
+                if (res[1] > 0) {
+                    amount = amount.subtract(Note.TWENTY_DOLLARS.getRepresentVal().multiply(BigDecimal.valueOf(res[1])));
+                    this.balanceNotes.put(Note.TWENTY_DOLLARS, this.balanceNotes.get(Note.TWENTY_DOLLARS) - res[1]);
+                }
             }
-        }
 
-        // FOR THE 20 DOLLARS EQUIVALENT
+            // FOR THE 1 DOLLAR EQUIVALENT
 
-        // Check if we have 10s in our balance inventory in the first place
-        if(this.balanceNotes.get(Note.TWENTY_DOLLARS) > 0){
-            // If the num of 20s in our inventory is higher than 20s in the entered sum we can use as much as possible
-            if(this.balanceNotes.get(Note.TWENTY_DOLLARS) >= amount.divide(Note.TWENTY_DOLLARS.getRepresentVal()).intValue()) {
-                res[1] = amount.divide(Note.TWENTY_DOLLARS.getRepresentVal()).intValue();
+            // Check if we have 10s in our balance inventory in the first place
+            if (this.balanceCoins.get(Coin.ONE_DOLLAR) > 0) {
+                // If the num of 1s in our inventory is higher than 1s in the entered sum we can use as much as possible
+                if (this.balanceCoins.get(Coin.ONE_DOLLAR) >= amount.divide(Coin.ONE_DOLLAR.getRepresentVal()).intValue()) {
+                    res[2] = amount.divide(Coin.ONE_DOLLAR.getRepresentVal()).intValue();
+                }
+                // if not then use all possible 1s
+                else
+                    res[2] = this.balanceCoins.get(Coin.ONE_DOLLAR);
+                // the amount is updated to go forward with next coins
+
+                // the balance inventory is decremented is case we have a new value for the num of 1s
+                if (res[2] > 0) {
+                    amount = amount.subtract(Coin.ONE_DOLLAR.getRepresentVal().multiply(BigDecimal.valueOf(res[2])));
+                    this.balanceCoins.put(Coin.ONE_DOLLAR, this.balanceCoins.get(Coin.ONE_DOLLAR) - res[2]);
+                }
             }
-            // if not then use all possible 20s
-            else
-                res[1] = this.balanceNotes.get(Note.TWENTY_DOLLARS);
-            // the amount is updated to go forward with next coins
 
-            // the balance inventory is decremented is case we have a new value for the num of 20s 
-            if(res[1] > 0){
-                amount = amount.subtract(Note.TWENTY_DOLLARS.getRepresentVal().multiply(BigDecimal.valueOf(res[1])));
-                this.balanceNotes.put(Note.TWENTY_DOLLARS, this.balanceNotes.get(Note.TWENTY_DOLLARS) - res[1]);
+            // FOR THE 50 CENTS EQUIVALENT
+
+            // Check if we have 50 cents in our balance inventory in the first place
+            if (this.balanceCoins.get(Coin.FIFTY_CENTS) > 0) {
+                // If the num of 50 cents in our inventory is higher than 50 cents in the entered sum we can use as much as possible
+                if (this.balanceCoins.get(Coin.FIFTY_CENTS) >= amount.divide(Coin.FIFTY_CENTS.getRepresentVal()).intValue()) {
+                    res[3] = amount.divide(Coin.FIFTY_CENTS.getRepresentVal()).intValue();
+                }
+                // if not then use all possible 50 cents
+                else
+                    res[3] = this.balanceCoins.get(Coin.FIFTY_CENTS);
+                // the amount is updated to go forward with next coins
+
+                // the balance inventory is decremented is case we have a new value for the num of 50 cents
+                if (res[3] > 0) {
+                    amount = amount.subtract(Coin.FIFTY_CENTS.getRepresentVal().multiply(BigDecimal.valueOf(res[3])));
+                    this.balanceCoins.put(Coin.FIFTY_CENTS, this.balanceCoins.get(Coin.FIFTY_CENTS) - res[3]);
+                }
             }
-        }
 
-        // FOR THE 1 DOLLAR EQUIVALENT
-        
-        // Check if we have 10s in our balance inventory in the first place
-        if(this.balanceCoins.get(Coin.ONE_DOLLAR) > 0){
-            // If the num of 1s in our inventory is higher than 1s in the entered sum we can use as much as possible
-            if(this.balanceCoins.get(Coin.ONE_DOLLAR) >= amount.divide(Coin.ONE_DOLLAR.getRepresentVal()).intValue()) {
-                res[2] = amount.divide(Coin.ONE_DOLLAR.getRepresentVal()).intValue();
+            // FOR THE 20 cents EQUIVALENT
+
+            // Check if we have 20 cents in our balance inventory in the first place
+            if (this.balanceCoins.get(Coin.TWENTY_CENTS) > 0) {
+                // If the num of 20 cents in our inventory is higher than 20 cents in the entered sum we can use as much as possible
+                if (this.balanceCoins.get(Coin.TWENTY_CENTS) >= amount.divide(Coin.TWENTY_CENTS.getRepresentVal()).intValue()) {
+                    res[4] = amount.divide(Coin.TWENTY_CENTS.getRepresentVal()).intValue();
+                }
+                // if not then use all possible 20 cents
+                else
+                    res[4] = this.balanceCoins.get(Coin.TWENTY_CENTS);
+                // the amount is updated to go forward with next coins
+
+                // the balance inventory is decremented is case we have a new value for the num of 20 cents
+                if (res[4] > 0) {
+                    amount = amount.subtract(Coin.TWENTY_CENTS.getRepresentVal().multiply(BigDecimal.valueOf(res[4])));
+                    this.balanceCoins.put(Coin.TWENTY_CENTS, this.balanceCoins.get(Coin.TWENTY_CENTS) - res[4]);
+                }
             }
-            // if not then use all possible 1s
-            else
-                res[2] = this.balanceCoins.get(Coin.ONE_DOLLAR);
-            // the amount is updated to go forward with next coins
 
-            // the balance inventory is decremented is case we have a new value for the num of 1s 
-            if(res[2] > 0){
-                amount = amount.subtract(Coin.ONE_DOLLAR.getRepresentVal().multiply(BigDecimal.valueOf(res[2])));
-                this.balanceCoins.put(Coin.ONE_DOLLAR, this.balanceCoins.get(Coin.ONE_DOLLAR) - res[2]);
+            // FOR THE 10 cents EQUIVALENT
+
+            // Check if we have 10 cents in our balance inventory in the first place
+            if (this.balanceCoins.get(Coin.TEN_CENTS) > 0) {
+                // If the num of 10 cents in our inventory is higher than 10 cents in the entered sum we can use as much as possible
+                if (this.balanceCoins.get(Coin.TEN_CENTS) >= amount.divide(Coin.TEN_CENTS.getRepresentVal()).intValue()) {
+                    res[5] = amount.divide(Coin.TEN_CENTS.getRepresentVal()).intValue();
+                }
+                // if not then use all possible 10 cents
+                else
+                    res[5] = this.balanceCoins.get(Coin.TEN_CENTS);
+                // the amount is updated to go forward with next coins
+
+                // the balance inventory is decremented is case we have a new value for the num of 10 cents
+                if (res[5] > 0) {
+                    amount = amount.subtract(Coin.TEN_CENTS.getRepresentVal().multiply(BigDecimal.valueOf(res[5])));
+                    this.balanceCoins.put(Coin.TEN_CENTS, this.balanceCoins.get(Coin.TEN_CENTS) - res[5]);
+                }
             }
-        }
-        
-        // FOR THE 50 CENTS EQUIVALENT
 
-        // Check if we have 50 cents in our balance inventory in the first place
-        if(this.balanceCoins.get(Coin.FIFTY_CENTS) > 0){
-            // If the num of 50 cents in our inventory is higher than 50 cents in the entered sum we can use as much as possible
-            if(this.balanceCoins.get(Coin.FIFTY_CENTS) >= amount.divide(Coin.FIFTY_CENTS.getRepresentVal()).intValue()) {
-                res[3] = amount.divide(Coin.FIFTY_CENTS.getRepresentVal()).intValue();
+            // the amount should be equal to 0 in case the numbers in res are enough to give change
+            // otherwise throw an exception for lack of balance
+            if (amount.compareTo(BigDecimal.valueOf(0.00)) != 0) {
+                throw new NotEnoughChange("Not enough change is available, contact the admin");
             }
-            // if not then use all possible 50 cents
-            else
-                res[3] = this.balanceCoins.get(Coin.FIFTY_CENTS);
-            // the amount is updated to go forward with next coins
 
-            // the balance inventory is decremented is case we have a new value for the num of 50 cents 
-            if(res[3] > 0){
-                amount = amount.subtract(Coin.FIFTY_CENTS.getRepresentVal().multiply(BigDecimal.valueOf(res[3])));
-                this.balanceCoins.put(Coin.FIFTY_CENTS, this.balanceCoins.get(Coin.FIFTY_CENTS) - res[3]);
-            }
-        }
+            // set coin count for change
+            c.setNumOfCoins(res);
 
-        // FOR THE 20 cents EQUIVALENT
+            // update to new machine balance
+            this.setBalance(calculateBalance());
 
-        // Check if we have 20 cents in our balance inventory in the first place
-        if(this.balanceCoins.get(Coin.TWENTY_CENTS) > 0){
-            // If the num of 20 cents in our inventory is higher than 20 cents in the entered sum we can use as much as possible
-            if(this.balanceCoins.get(Coin.TWENTY_CENTS) >= amount.divide(Coin.TWENTY_CENTS.getRepresentVal()).intValue()) {
-                res[4] = amount.divide(Coin.TWENTY_CENTS.getRepresentVal()).intValue();
-            }
-            // if not then use all possible 20 cents
-            else
-                res[4] = this.balanceCoins.get(Coin.TWENTY_CENTS);
-            // the amount is updated to go forward with next coins
 
-            // the balance inventory is decremented is case we have a new value for the num of 20 cents 
-            if(res[4] > 0){
-                amount = amount.subtract(Coin.TWENTY_CENTS.getRepresentVal().multiply(BigDecimal.valueOf(res[4])));
-                this.balanceCoins.put(Coin.TWENTY_CENTS, this.balanceCoins.get(Coin.TWENTY_CENTS) - res[4]);
-            }
-        }
 
-        // FOR THE 10 cents EQUIVALENT
-
-        // Check if we have 10 cents in our balance inventory in the first place
-        if(this.balanceCoins.get(Coin.TEN_CENTS) > 0){
-            // If the num of 10 cents in our inventory is higher than 10 cents in the entered sum we can use as much as possible
-            if(this.balanceCoins.get(Coin.TEN_CENTS) >= amount.divide(Coin.TEN_CENTS.getRepresentVal()).intValue()) {
-                res[5] = amount.divide(Coin.TEN_CENTS.getRepresentVal()).intValue();
-            }
-            // if not then use all possible 10 cents
-            else
-                res[5] = this.balanceCoins.get(Coin.TEN_CENTS);
-            // the amount is updated to go forward with next coins
-
-            // the balance inventory is decremented is case we have a new value for the num of 10 cents 
-            if(res[5] > 0){
-                amount = amount.subtract(Coin.TEN_CENTS.getRepresentVal().multiply(BigDecimal.valueOf(res[5])));
-                this.balanceCoins.put(Coin.TEN_CENTS, this.balanceCoins.get(Coin.TEN_CENTS) - res[5]);
-            }
-        }
-
-        // the amount should be equal to 0 in case the numbers in res are enough to give change
-        // otherwise throw an exception for lack of balance
-        if(amount.compareTo(BigDecimal.valueOf(0.00) ) != 0){
-            throw new NotEnoughChange("Not enough change is available, contact the admin");
-        }
-
-        // set coin count for change
-        c.setNumOfCoins(res);
-
-        // update to new machine balance
-        this.setBalance(calculateBalance());
 
     }
 

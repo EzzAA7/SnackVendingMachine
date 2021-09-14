@@ -2,11 +2,12 @@ package com.company.com.implementation;
 
 import com.company.com.money.Coin;
 import com.company.com.money.Note;
+import errors.NotEnoughChange;
 
 import java.math.BigDecimal;
 import java.util.*;
 
-public class SnackMachine {
+public class SnackMachine implements SnackMachineInterface {
 
     private EnumMap<Coin, Integer> balanceCoins;
     private EnumMap<Note, Integer> balanceNotes;
@@ -52,6 +53,7 @@ public class SnackMachine {
         this.products = products;
     }
 
+    @Override
     public BigDecimal calculateBalance() {
         BigDecimal sum = BigDecimal.valueOf(0.00);
         for (EnumMap.Entry<Coin, Integer> entry : balanceCoins.entrySet()) {
@@ -64,6 +66,7 @@ public class SnackMachine {
         return sum;
     }
 
+    @Override
     public void setupMachineMoney() {
         balanceCoins.put(Coin.ONE_DOLLAR, 6);
         balanceCoins.put(Coin.FIFTY_CENTS, 4);
@@ -75,6 +78,7 @@ public class SnackMachine {
 
     }
 
+    @Override
     public void fillMachineProducts() {
         products.put("A1", new Product("A1", "TWIX", BigDecimal.valueOf(4.50), 3));
         products.put("A2", new Product("A2", "KITKAT", BigDecimal.valueOf(4.30), 5));
@@ -103,6 +107,7 @@ public class SnackMachine {
         products.put("E5", new Product("E5", "SPRITE", BigDecimal.valueOf(2.90), 7));
     }
 
+    @Override
     public void displayProducts() {
         System.out.println(" \t\t\t\t\t\t*********************************************");
         System.out.println(" \t\t\t\t\t\t    WELCOME TO THE FREIGHTOS VENDING MACHINE           ");
@@ -146,7 +151,8 @@ public class SnackMachine {
         }
     }
 
-    public void calcChange(Change c){
+    @Override
+    public void calcChange(Change c) throws NotEnoughChange {
 
         BigDecimal amount = c.getAmount();
 
@@ -270,6 +276,10 @@ public class SnackMachine {
                 amount = amount.subtract(Coin.TEN_CENTS.getRepresentVal().multiply(BigDecimal.valueOf(res[5])));
                 this.balanceCoins.put(Coin.TEN_CENTS, this.balanceCoins.get(Coin.TEN_CENTS) - res[5]);
             }
+        }
+
+        if(amount.compareTo(BigDecimal.valueOf(0.00) ) != 0){
+            throw new NotEnoughChange("Not enough change is available, contact the admin");
         }
 
         // set coin count for change

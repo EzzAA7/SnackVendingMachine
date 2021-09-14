@@ -1,15 +1,19 @@
-package com.company;
+package com.company.com.implementation;
+
+import com.company.com.implementation.Change;
+import com.company.com.implementation.Product;
+import com.company.com.money.Coin;
 
 import java.math.BigDecimal;
 import java.util.*;
 
-public class VendingMachine {
+public class SnackMachine {
 
     private EnumMap<Coin, Integer> balanceCoins;
     private HashMap<Integer, Product> products;
     private BigDecimal balance;
 
-    public VendingMachine() {
+    public SnackMachine() {
         this.balanceCoins = new EnumMap<>(Coin.class);
         this.products = new HashMap<>();
         setupMachineMoney(balanceCoins);

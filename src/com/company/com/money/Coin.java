@@ -1,4 +1,4 @@
-package com.company;
+package com.company.com.money;
 
 import java.math.BigDecimal;
 

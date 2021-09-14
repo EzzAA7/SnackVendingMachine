@@ -1,28 +1,30 @@
-package com.company;
+package com.company.com.implementation;
+
+import com.company.com.money.Coin;
 
 import java.math.BigDecimal;
 import java.util.EnumMap;
 import java.util.HashMap;
 
 public class VMRunnder {
-    private VendingMachine vm;
+    private SnackMachine vm;
     private Product selectedProd;
     private HashMap<Coin, Integer> enteredCoins;
     private BigDecimal enteredSum;
     private Change yourChange;
 
-    public VMRunnder(VendingMachine vm) {
+    public VMRunnder(SnackMachine vm) {
         this.vm = vm;
         this.enteredCoins = new HashMap<>();
         this.enteredSum = BigDecimal.valueOf(0.00);
     }
 
-    public VendingMachine getVm() {
+    public SnackMachine getVm() {
 
         return vm;
     }
 
-    public void setVm(VendingMachine vm) {
+    public void setVm(SnackMachine vm) {
 
         this.vm = vm;
     }

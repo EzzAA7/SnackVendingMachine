@@ -1,5 +1,11 @@
 package com.company;
 
+import com.company.com.implementation.Change;
+import com.company.com.implementation.Product;
+import com.company.com.implementation.SnackMachine;
+import com.company.com.implementation.VMRunnder;
+import com.company.com.money.Coin;
+
 import java.util.Scanner;
 
 public class Driver {
@@ -17,10 +23,10 @@ public class Driver {
 //        vmr.enterCoin(Coin.TEN_SHEKELS);
 //        vmr.enterCoin(Coin.TEN_SHEKELS);
 
-        VendingMachine vendingMachine = new VendingMachine();
+        SnackMachine snackMachine = new SnackMachine();
 
-        VMRunnder vmr = new VMRunnder(vendingMachine);
-        vendingMachine.displayProducts();
+        VMRunnder vmr = new VMRunnder(snackMachine);
+        snackMachine.displayProducts();
 
         vmr.enterCoin(Coin.ONE_DOLLAR);
         vmr.enterCoin(Coin.ONE_DOLLAR);
@@ -30,7 +36,7 @@ public class Driver {
 
         int choice = inputProductAndBalance(vmr);
 
-        Product chosenProduct = checkProductValidity(vendingMachine, choice, vmr);
+        Product chosenProduct = checkProductValidity(snackMachine, choice, vmr);
 
         // check if in balance (if entered is not less than the price)
         if(vmr.getEnteredSum().compareTo(chosenProduct.getPrice()) < 0){
@@ -38,7 +44,7 @@ public class Driver {
         }
 
         // check if vending machine has enough money to return change
-        else if(vendingMachine.getBalance().compareTo(vmr.getEnteredSum().subtract(chosenProduct.getPrice())) < 0){
+        else if(snackMachine.getBalance().compareTo(vmr.getEnteredSum().subtract(chosenProduct.getPrice())) < 0){
             System.out.println("Vending machine doesn't have enough change, contact admin");
         }
 
@@ -56,7 +62,7 @@ public class Driver {
                 vmr.setYourChange(new Change(vmr.getEnteredSum().subtract(chosenProduct.getPrice())));
 
                 // calculate how change will return to user (in coins)
-                vendingMachine.calcChange(vmr.getYourChange());
+                snackMachine.calcChange(vmr.getYourChange());
                 System.out.println(" ");
                 System.out.println(vmr.getYourChange().toString());
 
@@ -75,8 +81,8 @@ public class Driver {
 
     }
 
-    private static Product checkProductValidity(VendingMachine vendingMachine, int choice, VMRunnder v) {
-        Product chosenProduct = vendingMachine.getProducts().get(choice);
+    private static Product checkProductValidity(SnackMachine snackMachine, int choice, VMRunnder v) {
+        Product chosenProduct = snackMachine.getProducts().get(choice);
         if(chosenProduct == null){
             System.out.println("No such product, try again");
 
@@ -84,7 +90,7 @@ public class Driver {
 
             int newChoice = inputProductAndBalance(v);
 
-            return checkProductValidity(vendingMachine, newChoice, v);
+            return checkProductValidity(snackMachine, newChoice, v);
         }
         else {
             System.out.println("The selected product is the following:");

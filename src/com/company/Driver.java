@@ -6,19 +6,9 @@ public class Driver {
 
     public static void main(String[] args) {
 
-        VendingMachine vendingMachine = new VendingMachine();
-
-        VMRunnder vmr = new VMRunnder(vendingMachine);
-        vendingMachine.displayProducts();
-
-        vmr.displayBalance();
-
         //TODO: remove tests
-        vmr.enterCoin(Coin.TEN_SHEKELS);
-        vmr.enterCoin(Coin.TEN_SHEKELS);
-        vmr.enterCoin(Coin.TEN_SHEKELS);
-        vmr.enterCoin(Coin.TEN_SHEKELS);
-        vmr.enterCoin(Coin.TWO_SHEKELS);
+        // TODO: check validity of choice
+
 
 //        vmr.enterCoin(Coin.TEN_SHEKELS);
 //        vmr.enterCoin(Coin.FIVE_SHEKELS);
@@ -27,18 +17,20 @@ public class Driver {
 //        vmr.enterCoin(Coin.TEN_SHEKELS);
 //        vmr.enterCoin(Coin.TEN_SHEKELS);
 
+        VendingMachine vendingMachine = new VendingMachine();
 
-        int choice = getChoice();
+        VMRunnder vmr = new VMRunnder(vendingMachine);
+        vendingMachine.displayProducts();
 
-        Product chosenProduct = vendingMachine.getProducts().get(choice);
-        if(chosenProduct == null){
-            System.out.println("No such product, try again");
-            //TODO: try again
-        }
-        else {
-            System.out.println("The selected product is the following:");
-            System.out.println("     " + chosenProduct.getProductId() + "  " + chosenProduct.getName() + " | " + chosenProduct.getPrice() + " Shekels   ");
-        }
+//        vmr.enterCoin(Coin.TEN_SHEKELS);
+//        vmr.enterCoin(Coin.TEN_SHEKELS);
+//        vmr.enterCoin(Coin.TEN_SHEKELS);
+//        vmr.enterCoin(Coin.TEN_SHEKELS);
+//        vmr.enterCoin(Coin.TWO_SHEKELS);
+
+        int choice = inputProductAndBalance(vmr);
+
+        Product chosenProduct = checkProductValidity(vendingMachine, choice, vmr);
 
         // check if in balance
         if(vmr.getEnteredSum() < chosenProduct.getPrice()){
@@ -72,9 +64,7 @@ public class Driver {
                 chosenProduct.setQuantity(chosenProduct.getQuantity() -1);
 
                 // dispense product
-                System.out.println(" DISPENSING:");
-                System.out.println("     " + chosenProduct.getProductId() + "  " + chosenProduct.getName() + " | " +
-                        chosenProduct.getQuantity() + "   ");
+                vmr.disposeSelectedProduct();
 
             }
             catch (Exception e){
@@ -83,6 +73,35 @@ public class Driver {
 
         }
 
+    }
+
+    private static Product checkProductValidity(VendingMachine vendingMachine, int choice, VMRunnder v) {
+        Product chosenProduct = vendingMachine.getProducts().get(choice);
+        if(chosenProduct == null){
+            System.out.println("No such product, try again");
+
+            //TODO: try again
+
+            int newChoice = inputProductAndBalance(v);
+
+            return checkProductValidity(vendingMachine, newChoice, v);
+        }
+        else {
+            System.out.println("The selected product is the following:");
+            System.out.println("     " + chosenProduct.getProductId() + "  " + chosenProduct.getName() + " | " + chosenProduct.getPrice() + " Shekels   ");
+        }
+        return chosenProduct;
+    }
+
+    private static int inputProductAndBalance(VMRunnder vmr) {
+        System.out.println("                                              ");
+        System.out.println(" --- Please select a product (type its id) --- ");
+
+        int choice = getChoice();
+        // TODO: check validity of choice
+
+        vmr.displayBalance();
+        return choice;
     }
 
     private static int getChoice() {

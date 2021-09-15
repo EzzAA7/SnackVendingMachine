@@ -106,26 +106,26 @@ public class SnackMachine implements SnackMachineInterface {
         products.put("A3", new Product("A3", "XL", BigDecimal.valueOf(5.50), 10));
         products.put("A4", new Product("A4", "WATER", BigDecimal.valueOf(1.70), 2));
         products.put("A5", new Product("A5", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("B1", new Product("B1", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("B2", new Product("B2", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("B3", new Product("B3", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("B4", new Product("B4", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("B5", new Product("B5", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("C1", new Product("C1", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("C2", new Product("C2", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("C3", new Product("C3", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("C4", new Product("C4", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("C5", new Product("C5", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("D1", new Product("D1", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("D2", new Product("D2", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("D3", new Product("D3", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("D4", new Product("D4", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("D5", new Product("D5", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("E1", new Product("E1", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("E2", new Product("E2", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("E3", new Product("E3", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("E4", new Product("E4", "COCA-COLA", BigDecimal.valueOf(2.90), 7));
-        products.put("E5", new Product("E5", "SPRITE", BigDecimal.valueOf(2.90), 7));
+        products.put("B1", new Product("B1", "FANTA", BigDecimal.valueOf(2.10), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("B2", new Product("B2", "BAVARIA", BigDecimal.valueOf(2.20), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("B3", new Product("B3", "MIRANDA", BigDecimal.valueOf(2.00), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("B4", new Product("B4", "RED-PEPPER", BigDecimal.valueOf(3.90), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("B5", new Product("B5", "COKE", BigDecimal.valueOf(1.90), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("C1", new Product("C1", "COKE-DI", BigDecimal.valueOf(0.90), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("C2", new Product("C2", "TIMEOUT", BigDecimal.valueOf(4.90), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("C3", new Product("C3", "AQUANA", BigDecimal.valueOf(5.70), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("C4", new Product("C4", "JERICHO", BigDecimal.valueOf(4.10), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("C5", new Product("C5", "EIN-GEDI", BigDecimal.valueOf(1.50), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("D1", new Product("D1", "MARS", BigDecimal.valueOf(2.90), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("D2", new Product("D2", "SNICKERS", BigDecimal.valueOf(2.90), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("D3", new Product("D3", "BOUNTY", BigDecimal.valueOf(2.90), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("D4", new Product("D4", "MALTESERS", BigDecimal.valueOf(2.90), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("D5", new Product("D5", "CADBURY", BigDecimal.valueOf(2.90), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("E1", new Product("E1", "KINDER", BigDecimal.valueOf(2.90), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("E2", new Product("E2", "COCA-COLA", BigDecimal.valueOf(2.90), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("E3", new Product("E3", "COCA-COLA", BigDecimal.valueOf(2.90), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("E4", new Product("E4", "COCA-COLA", BigDecimal.valueOf(2.90), 0 + (int)(Math.random() * ((10 - 0) + 1))));
+        products.put("E5", new Product("E5", "SPRITE", BigDecimal.valueOf(2.90), 0 + (int)(Math.random() * ((10 - 0) + 1))));
     }
 
     /**

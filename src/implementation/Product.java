@@ -55,7 +55,7 @@ public class Product {
         }
         else {
             System.out.println(" ");
-            System.out.println("The selected product is the following:");
+            System.out.print("The selected product is the following:\n");
             System.out.println("     " + chosenProduct.getProductId() + "  " + chosenProduct.getName() + " | " + chosenProduct.getPrice() + " $   ");
         }
         return chosenProduct;

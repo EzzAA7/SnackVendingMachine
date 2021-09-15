@@ -44,9 +44,7 @@ public class Driver {
 
             String choice = inputProduct(vmr);
 
-            Product chosenProduct = snackMachine.getProducts().get(choice);
-
-            chosenProduct = chosenProduct.checkProductValidity(snackMachine, choice, vmr, chosenProduct);
+            Product chosenProduct = Product.checkProductValidity(snackMachine, choice, vmr);
             Boolean choseMoney = false;
 
             // check if vending machine has enough money to return change

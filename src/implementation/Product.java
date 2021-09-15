@@ -46,8 +46,9 @@ public class Product {
         this.name = name;
     }
 
-    public Product checkProductValidity(SnackMachine snackMachine, String choice, VMRunner v, Product chosenProduct) throws NoSuchProductException {
+    public static Product checkProductValidity(SnackMachine snackMachine, String choice, VMRunner v) throws NoSuchProductException {
 
+        Product chosenProduct = snackMachine.getProducts().get(choice);
         // checking validity of such a product
         if(chosenProduct == null){
             throw new NoSuchProductException("No such product, try again");

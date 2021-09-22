@@ -12,7 +12,5 @@ public interface VMRImplementation {
 
     void displayBalance();
 
-    BigDecimal calculateEnteredSum();
-
     void disposeSelectedProduct();
 }

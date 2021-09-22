@@ -4,6 +4,7 @@ import interfaces.VMRImplementation;
 import components.Card;
 import components.Coin;
 import components.Note;
+import utils.MoneyUtil;
 
 import java.math.BigDecimal;
 import java.util.EnumMap;
@@ -99,7 +100,7 @@ public class VMRunner implements VMRImplementation {
     @Override
     public void enterCoin(Coin c) {
         this.enteredCoins.put(c, this.enteredCoins.getOrDefault(c,0)+1);
-        this.setEnteredSum(calculateEnteredSum());
+        this.setEnteredSum(new MoneyUtil().calculateEnteredSum(this));
         System.out.println("You have entered " + c + " ====> The total is now: " + enteredSum);
     }
 
@@ -110,7 +111,7 @@ public class VMRunner implements VMRImplementation {
     @Override
     public void enterNote(Note note) {
         this.enteredNotes.put(note, this.enteredNotes.getOrDefault(note,0)+1);
-        this.setEnteredSum(calculateEnteredSum());
+        this.setEnteredSum(new MoneyUtil().calculateEnteredSum(this));
         System.out.println("You have entered " + note + " ====> The total is now: " + enteredSum);
     }
 
@@ -121,27 +122,6 @@ public class VMRunner implements VMRImplementation {
     public void displayBalance(){
         System.out.println(" The current entered amount is: " + this.getEnteredSum());
         System.out.println(" ------------------------------------------ ");
-    }
-
-    /**
-     * Iterates the values in the enteredCoins map and calculates the the value of each
-     * coin as its quantity multiplied by its representation
-     * and each calculated value is added to the same
-     * Also iterates similarly through enteredNotes map and calculates the the value of each
-     * note as its quantity multiplied by its representation
-     * and each calculated value is added to the sum
-     * @return the decimal summation of entered money
-     */
-    @Override
-    public BigDecimal calculateEnteredSum() {
-        BigDecimal sum = BigDecimal.valueOf(0.00);
-        for (EnumMap.Entry<Coin, Integer> entry : enteredCoins.entrySet()) {
-            sum = sum.add(BigDecimal.valueOf(entry.getValue()).multiply(entry.getKey().getRepresentVal()));
-        }
-        for (EnumMap.Entry<Note, Integer> entry : enteredNotes.entrySet()) {
-            sum = sum.add(BigDecimal.valueOf(entry.getValue()).multiply(entry.getKey().getRepresentVal()));
-        }
-        return sum;
     }
 
     /**

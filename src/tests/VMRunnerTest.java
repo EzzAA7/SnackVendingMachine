@@ -11,6 +11,8 @@ import implementation.VMRunner;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import utils.ChangeUtil;
+import utils.MoneyUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -71,7 +73,7 @@ public class VMRunnerTest {
         vmRunner.enterCoin(desiredCoin);
         vmRunner.enterCoin(desiredCoin);
 
-        BigDecimal val = vmRunner.calculateEnteredSum();
+        BigDecimal val = new MoneyUtil().calculateEnteredSum(vmRunner);
         assertEquals(BigDecimal.valueOf(1.50), val);
     }
 
@@ -110,7 +112,7 @@ public class VMRunnerTest {
         vmRunner.enterNote(desiredNote);
         vmRunner.enterNote(desiredNote);
 
-        BigDecimal val = vmRunner.calculateEnteredSum();
+        BigDecimal val = new MoneyUtil().calculateEnteredSum(vmRunner);
         assertEquals(BigDecimal.valueOf(40.00), val);
     }
 
@@ -198,7 +200,7 @@ public class VMRunnerTest {
         Note desiredNote = Note.noteValue(money);
         vmRunner.enterNote(desiredNote);
         vmRunner.setYourChange(new Change(vmRunner.getEnteredSum().subtract(chosenProduct.getPrice())));
-        snackMachine.calcChange(vmRunner.getYourChange());
+        new ChangeUtil().calcChange(vmRunner.getYourChange(), snackMachine);
         assertEquals(BigDecimal.valueOf(45.7), vmRunner.getYourChange().getAmount());
         assertArrayEquals(new int[]{0,2,5,1,1,0}, vmRunner.getYourChange().getNumOfCoins());
 

@@ -8,6 +8,8 @@ import components.Card;
 import components.Coin;
 import components.Note;
 import exceptions.*;
+import utils.ChangeUtil;
+import utils.MoneyUtil;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -90,7 +92,7 @@ public class Driver {
 
                 // after each insertion print the balacne for the user
                 vmr.displayBalance();
-            }
+        }
 
             /**
              * setup handling the change, printing it, decrementing the quantity
@@ -199,7 +201,7 @@ public class Driver {
         if(vmr.getYourCard() == null) {
             // initialize change amount
             vmr.setYourChange(new Change(vmr.getEnteredSum().subtract(chosenProduct.getPrice())));
-            snackMachine.calcChange(vmr.getYourChange());
+            new ChangeUtil().calcChange(vmr.getYourChange(), snackMachine);
             System.out.println(vmr.getYourChange().toString());
         }
         // in case of using a card there will be no change so immediately make payment

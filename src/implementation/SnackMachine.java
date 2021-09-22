@@ -190,6 +190,10 @@ public class SnackMachine implements SnackMachineInterface {
 
         int[] res = new int[6];
 
+        //following logic is repetitive, can  create
+        // Coin[] coins = Coin.values();
+        // and use it instead in a for loop with a separate index representing res index
+
         // FOR THE 50 DOLLARS EQUIVALENT
 
         // Check if we have 50s in our balance inventory in the first place
@@ -321,10 +325,6 @@ public class SnackMachine implements SnackMachineInterface {
 
             // update to new machine balance
             this.setBalance(calculateBalance());
-
-
-
-
     }
 
 }

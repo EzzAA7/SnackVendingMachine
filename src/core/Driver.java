@@ -40,68 +40,65 @@ public class Driver {
     private static void startMachine(SnackMachine snackMachine) throws NoSuchProductException, NoSuchMonetary, NotEnoughInStock, NotEnoughChange, NotPossibleCard, NotSufficientFundsCard, NoSuchSlot {
 
         VMRunner vmr = new VMRunner(snackMachine);
-            snackMachine.displayProducts();
+        snackMachine.displayProducts();
 
-            String choice = inputProduct(vmr);
+        String choice = inputProduct(vmr);
 
-            Product chosenProduct = Product.checkProductValidity(snackMachine, choice, vmr);
-            Boolean choseMoney = false;
+        Product chosenProduct = Product.checkProductValidity(snackMachine, choice, vmr);
+        Boolean choseMoney = false;
 
-            // check if vending machine has enough money to return change
-            if(snackMachine.getBalance().compareTo(vmr.getEnteredSum().subtract(chosenProduct.getPrice())) < 0){
-                throw new NotEnoughChange("Vending machine doesn't have enough change, contact admin");
-            }
+        // check if vending machine has enough money to return change
+        if(snackMachine.getBalance().compareTo(vmr.getEnteredSum().subtract(chosenProduct.getPrice())) < 0){
+            throw new NotEnoughChange("Vending machine doesn't have enough change, contact admin");
+        }
 
-            // check if the chosen product is in stock
-            else if( chosenProduct.getQuantity() < 1){
-                throw new NotEnoughInStock("Not in stock, contact admin");
-            }
+        // check if the chosen product is in stock
+        else if( chosenProduct.getQuantity() < 1){
+            throw new NotEnoughInStock("Not in stock, contact admin");
+        }
 
-            // meets needed conditions so can proceed
-            else{
+        // meets needed conditions so can proceed
+        else{
 
-                // check if in balance (if entered is not less than the price)
-                while(vmr.getEnteredSum().compareTo(chosenProduct.getPrice()) < 0){
-                    // setup user choise for which money slot
-                    setupSlotDecision(choseMoney);
+            // check if in balance (if entered is not less than the price)
+            while(vmr.getEnteredSum().compareTo(chosenProduct.getPrice()) < 0){
+                // setup user choise for which money slot
+                setupSlotDecision(choseMoney);
 
-                    int slot = getSlot();
-                    BigDecimal money;
+                int slot = getSlot();
+                BigDecimal money;
 
-                    // check which slot was chosen
-                    if(slot == 1){
-                        choseMoney = handleCoinSlot(vmr);
-                    }
-
-                    // if its the cardSlot check if no previous coin/note slots were used
-                    else if(slot == 2 && choseMoney == false){
-                        handleCardSlot(vmr, chosenProduct);
-                        break;
-                    }
-
-                    // in case noteSlot is chosen
-                    else if(slot == 3){
-                        choseMoney = handleNoteSlot(vmr);
-                    }
-                    // any other entered value is invalid
-                    else{
-                        throw new NoSuchSlot("Choose a valid slot, you have 3 to choose from");
-                    }
-
-                    // after each insertion print the balacne for the user
-                    vmr.displayBalance();
+                // check which slot was chosen
+                if(slot == 1){
+                    choseMoney = handleCoinSlot(vmr);
                 }
 
-                /**
-                 * setup handling the change, printing it, decrementing the quantity
-                 * and finally dispensing the product
-                 */
-                setupResult(snackMachine, vmr, chosenProduct);
+                // if its the cardSlot check if no previous coin/note slots were used
+                else if(slot == 2 && choseMoney == false){
+                    handleCardSlot(vmr, chosenProduct);
+                    break;
+                }
 
+                // in case noteSlot is chosen
+                else if(slot == 3){
+                    choseMoney = handleNoteSlot(vmr);
+                }
+                // any other entered value is invalid
+                else{
+                    throw new NoSuchSlot("Choose a valid slot, you have 3 to choose from");
+                }
+
+                // after each insertion print the balacne for the user
+                vmr.displayBalance();
             }
 
+            /**
+             * setup handling the change, printing it, decrementing the quantity
+             * and finally dispensing the product
+             */
+            setupResult(snackMachine, vmr, chosenProduct);
 
-
+        }
     }
 
     /**

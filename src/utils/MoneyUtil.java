@@ -5,6 +5,7 @@ import components.Note;
 import implementation.SnackMachine;
 import implementation.VMRunner;
 import interfaces.MonetaryValue;
+import interfaces.SnackMachineInterface;
 
 import java.math.BigDecimal;
 import java.util.EnumMap;
@@ -32,7 +33,7 @@ public class MoneyUtil {
      * and each calculated value is added to the sum
      * @return the decimal summation of balance
      */
-    public BigDecimal calculateBalance(SnackMachine snackMachine) {
+    public BigDecimal calculateBalance(SnackMachineInterface snackMachine) {
         BigDecimal sum = BigDecimal.valueOf(0.00);
         for (EnumMap.Entry<Coin, Integer> entry : snackMachine.getBalanceCoins().entrySet()) {
             sum = sum.add(BigDecimal.valueOf(entry.getValue()).multiply(entry.getKey().getRepresentVal()));

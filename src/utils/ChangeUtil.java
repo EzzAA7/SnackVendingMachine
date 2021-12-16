@@ -5,6 +5,7 @@ import components.Note;
 import exceptions.NotEnoughChange;
 import implementation.Change;
 import implementation.SnackMachine;
+import interfaces.SnackMachineInterface;
 
 import java.math.BigDecimal;
 
@@ -19,7 +20,7 @@ public class ChangeUtil {
      * @throws NotEnoughChange in case the machine's coins/notes are not enough to give change
      * even if within the full balance
      */
-    public void calcChange(Change c, SnackMachine s) throws NotEnoughChange {
+    public void calcChange(Change c, SnackMachineInterface s) throws NotEnoughChange {
 
         BigDecimal amount = c.getAmount();
 

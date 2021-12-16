@@ -1,6 +1,7 @@
 package implementation;
 
 import exceptions.NoSuchProductException;
+import interfaces.SnackMachineInterface;
 
 import java.math.BigDecimal;
 
@@ -46,7 +47,7 @@ public class Product {
         this.name = name;
     }
 
-    public static Product checkProductValidity(SnackMachine snackMachine, String choice, VMRunner v) throws NoSuchProductException {
+    public static Product checkProductValidity(SnackMachineInterface snackMachine, String choice, VMRunner v) throws NoSuchProductException {
 
         Product chosenProduct = snackMachine.getProducts().get(choice);
         // checking validity of such a product

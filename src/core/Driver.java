@@ -8,6 +8,7 @@ import components.Card;
 import components.Coin;
 import components.Note;
 import exceptions.*;
+import interfaces.SnackMachineInterface;
 import utils.ChangeUtil;
 import utils.MoneyUtil;
 
@@ -25,8 +26,8 @@ public class Driver {
     public static void main(String[] args) throws NoSuchMonetary, NotPossibleCard, NoSuchSlot,
             NotEnoughInStock, NotEnoughChange, NotSufficientFundsCard, NoSuchProductException {
 
-        SnackMachine snackMachine = new SnackMachine();
-        startMachine(snackMachine);
+        SnackMachineInterface snackMachineInterface = new SnackMachine();
+        startMachine(snackMachineInterface);
 
     }
 
@@ -39,7 +40,7 @@ public class Driver {
      * and finally dispensing the product
      * @param snackMachine the main machine
      */
-    private static void startMachine(SnackMachine snackMachine) throws NoSuchProductException, NoSuchMonetary, NotEnoughInStock, NotEnoughChange, NotPossibleCard, NotSufficientFundsCard, NoSuchSlot {
+    private static void startMachine(SnackMachineInterface snackMachine) throws NoSuchProductException, NoSuchMonetary, NotEnoughInStock, NotEnoughChange, NotPossibleCard, NotSufficientFundsCard, NoSuchSlot {
 
         VMRunner vmr = new VMRunner(snackMachine);
         snackMachine.displayProducts();
@@ -191,7 +192,7 @@ public class Driver {
         return choseMoney;
     }
 
-    private static void setupResult(SnackMachine snackMachine, VMRunner vmr, Product chosenProduct) throws NotEnoughChange {
+    private static void setupResult(SnackMachineInterface snackMachine, VMRunner vmr, Product chosenProduct) throws NotEnoughChange {
         // setup selected product
         vmr.setSelectedProd(chosenProduct);
         System.out.println(" ");

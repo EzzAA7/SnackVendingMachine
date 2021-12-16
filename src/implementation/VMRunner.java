@@ -1,5 +1,6 @@
 package implementation;
 
+import interfaces.SnackMachineInterface;
 import interfaces.VMRImplementation;
 import components.Card;
 import components.Coin;
@@ -11,7 +12,7 @@ import java.util.EnumMap;
 import java.util.HashMap;
 
 public class VMRunner implements VMRImplementation {
-    private SnackMachine vm;
+    private SnackMachineInterface vm;
     private Product selectedProd;
     private EnumMap<Coin, Integer> enteredCoins;
     private EnumMap<Note, Integer> enteredNotes;
@@ -23,14 +24,14 @@ public class VMRunner implements VMRImplementation {
      * initializes a vending machine runner with empty enteredCoins and enteredNotes
      * initializes the entered sum with 0
      */
-    public VMRunner(SnackMachine vm) {
+    public VMRunner(SnackMachineInterface vm) {
         this.vm = vm;
         this.enteredCoins = new EnumMap<>(Coin.class);
         this.enteredNotes = new EnumMap<>(Note.class);
         this.enteredSum = BigDecimal.valueOf(0.00);
     }
 
-    public SnackMachine getVm() {
+    public SnackMachineInterface getVm() {
 
         return vm;
     }
